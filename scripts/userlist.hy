@@ -13,7 +13,7 @@
 (def default-html (slurp "/etc/skel/public_html/index.html"))
 
 (defn dir->html [username]
-  (let [[default (= default-html (slurp (.format "/home/{}/public_html/index.html" dirname)))]]
+  (let [[default (= default-html (slurp (.format "/home/{}/public_html/index.html" username)))]]
     (.format "<li><a href=\"http://tilde.town/~{}\">{}</a> {}</li>"
              username username
              (if default
