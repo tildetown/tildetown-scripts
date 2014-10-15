@@ -8,7 +8,7 @@
 (def timestamp (.strftime (.now datetime) "%Y-%m-%d %H:%M:%S"))
 
 (defn slurp [filename]
-  (.read (open filename "r")))
+  (.read (apply open [filename "r"] {"encoding" "utf-8"})))
 
 (def default-html (slurp "/etc/skel/public_html/index.html"))
 
