@@ -34,9 +34,9 @@
 (defn users [] (listdir "/home"))
 
 (def user-list (->> (users)
+                    (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))
                     sort-user-list
                     reversed
-                    (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))
                     (map dir->html)
                     (.join "\n")))
 
