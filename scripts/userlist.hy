@@ -1,4 +1,5 @@
 (import [os [listdir]])
+(import [os.path [getmtime]])
 (import [datetime [datetime]])
 
 ;; this script emits HTML on standard out that constitutes a user
@@ -23,10 +24,23 @@
                "(default :3)"
                ""))))
 
-(def user-list (->> (listdir "/home")
-                sorted
-                (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))
-                (map dir->html)
-                (.join "\n")))
+(defn modify-time [username]
+  (getmtime (.format "/home/{}/public_html" username)))
 
-(print (.format "<sub>generated at {}</sub><br><ul>{}</ul>" timestamp user-list))
+
+(defn sort-user-list [usernames]
+  (apply sorted [usernames] {"key" modify-time}))
+
+(defn users [] (listdir "/home"))
+
+(def user-list (->> (users)
+                    sort-user-list
+                    reversed
+                    (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))
+                    (map dir->html)
+                    (.join "\n")))
+
+(print (.format "our esteemed users ({}) <sub>generated at {}</sub><br><ul>{}</ul>"
+                (len (users))
+                timestamp
+                user-list))
