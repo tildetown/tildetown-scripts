@@ -8,7 +8,10 @@
 (def timestamp (.strftime (.now datetime) "%Y-%m-%d %H:%M:%S"))
 
 (defn slurp [filename]
-  (.read (apply open [filename "r"] {"encoding" "utf-8"})))
+  (try
+    (.read (apply open [filename "r"] {"encoding" "utf-8"}))
+  (catch [e Exception]
+    "")))
 
 (def default-html (slurp "/etc/skel/public_html/index.html"))
 
@@ -22,7 +25,7 @@
 
 (def user-list (->> (listdir "/home")
                 sorted
-                (filter (fn [f] (not (= f "ubuntu"))))
+                (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))
                 (map dir->html)
                 (.join "\n")))
 
