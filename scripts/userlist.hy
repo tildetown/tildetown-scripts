@@ -40,7 +40,7 @@
                     (map dir->html)
                     (.join "\n")))
 
-(print (.format "our esteemed users ({}) <sub>generated at {}</sub><br><ul>{}</ul>"
+(print (.format "our esteemed users ({})<br> <sub>generated at {}</sub><br><ul>{}</ul>"
                 (len (users))
                 timestamp
                 user-list))
