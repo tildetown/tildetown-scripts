@@ -31,16 +31,16 @@
 (defn sort-user-list [usernames]
   (apply sorted [usernames] {"key" modify-time}))
 
-(defn users [] (listdir "/home"))
+(defn user-generator [] (-> (listdir "/home")
+                            (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))))
 
-(def user-list (->> (users)
-                    (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))
+(def user-list (->> (user-generator)
                     sort-user-list
                     reversed
                     (map dir->html)
                     (.join "\n")))
 
 (print (.format "our esteemed users ({})<br> <sub>generated at {}</sub><br><ul>{}</ul>"
-                (len (users))
+                (len (user-generator))
                 timestamp
                 user-list))
