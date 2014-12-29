@@ -1,0 +1,11 @@
+#!/bin/bash
+
+collect=
+
+while read -r; do
+  collect="$collect / $REPLY"
+done
+
+status=$(echo $collect | sed -r 's/^.{2}//')
+
+twurl -X POST "/1.1/statuses/update.json?status=$status"
