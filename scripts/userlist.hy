@@ -2,6 +2,8 @@
 (import [os.path [getmtime]])
 (import [datetime [datetime]])
 
+(import [sh [find]])
+
 ;; this script emits HTML on standard out that constitutes a user
 ;; list. It denotes who has not updated their page from the
 ;; default. It also reports the time this script was run.
@@ -25,15 +27,18 @@
                ""))))
 
 (defn modify-time [username]
-  (getmtime (.format "/home/{}/public_html" username)))
-
+  (->> (.format "/home/{}/public_html" username)
+       find
+       (map (fn [filename] (getmtime (.rstrip filename))))
+       list
+       max))
 
 (defn sort-user-list [usernames]
   (apply sorted [usernames] {"key" modify-time}))
 
 (defn user-generator [] (->> (listdir "/home")
-                             (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))
-                             list))
+                             (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))))
+                             ;list))
 
 (def user-list (->> (user-generator)
                     sort-user-list
