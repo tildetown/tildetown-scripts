@@ -37,8 +37,8 @@
   (apply sorted [usernames] {"key" modify-time}))
 
 (defn user-generator [] (->> (listdir "/home")
-                             (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))))
-                             ;list))
+                             (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))
+                             list))
 
 (def user-list (->> (user-generator)
                     sort-user-list
