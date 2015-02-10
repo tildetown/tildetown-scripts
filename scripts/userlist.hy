@@ -28,10 +28,17 @@
 
 (defn bounded-find [path] (find path "-maxdepth" "3"))
 
+(defn guarded-mtime [filename]
+  (let [[path (.rstrip filename)]]
+    (try
+      (getmtime path)
+    (catch [e Exception]
+      0))))
+
 (defn modify-time [username]
   (->> (.format "/home/{}/public_html" username)
        bounded-find
-       (map (fn [filename] (getmtime (.rstrip filename))))
+       (map guarded-mtime)
        list
        max))
 
