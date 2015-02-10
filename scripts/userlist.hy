@@ -26,9 +26,11 @@
                "(default :3)"
                ""))))
 
+(defn bounded-find [path] (find path "-maxdepth" "3"))
+
 (defn modify-time [username]
   (->> (.format "/home/{}/public_html" username)
-       find
+       bounded-find
        (map (fn [filename] (getmtime (.rstrip filename))))
        list
        max))
