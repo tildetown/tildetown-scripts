@@ -26,7 +26,10 @@
                "(default :3)"
                ""))))
 
-(defn bounded-find [path] (find path "-maxdepth" "3"))
+(defn bounded-find [path]
+  ;; find might return 1 but still have worked fine (because of dirs it can't
+  ;; go into)
+  (apply find [path "-maxdepth" "3"] {"_ok_code" [0 1]}))
 
 (defn guarded-mtime [filename]
   (let [[path (.rstrip filename)]]
