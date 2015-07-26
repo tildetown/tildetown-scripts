@@ -51,9 +51,9 @@
                         reversed
                         (map (fn [un] {"username" un
                                        "default" (default? un)}))
-                        list)
+                        list)]
          [live_users (-> (filter (fn [u] (not (get u "default"))) all_users)
-                         list)]]
+                         list)]
         [data {"all_users" users
                "live_users" live_users
                "active_user_count" (-> (. (facter "active_user_count") stdout)
