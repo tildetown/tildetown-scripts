@@ -1,14 +1,13 @@
+(import [json [dumps]])
 (import [os [listdir]])
 (import [os.path [getmtime]])
 (import [datetime [datetime]])
 
-(import [sh [find]])
+(import [sh [find facter]])
 
-;; this script emits HTML on standard out that constitutes a user
-;; list. It denotes who has not updated their page from the
-;; default. It also reports the time this script was run.
-
-(def timestamp (.strftime (.now datetime) "%Y-%m-%d %H:%M:%S"))
+;; this script emits json on standard out that has information about tilde.town
+;; users. It denotes who has not updated their page from the default. It also
+;; reports the time this script was run. The user list is sorted by public_html update time.
 
 (defn slurp [filename]
   (try
@@ -18,13 +17,8 @@
 
 (def default-html (slurp "/etc/skel/public_html/index.html"))
 
-(defn dir->html [username]
-  (let [[default (= default-html (slurp (.format "/home/{}/public_html/index.html" username)))]]
-    (.format "<li><a href=\"http://tilde.town/~{}\">{}</a> {}</li>"
-             username username
-             (if default
-               "(default :3)"
-               ""))))
+(defn default? [username]
+  (= default-html (slurp (.format "/home/{}/public_html/index.html" username))))
 
 (defn bounded-find [path]
   ;; find might return 1 but still have worked fine (because of dirs it can't
@@ -51,13 +45,17 @@
 (defn user-generator [] (->> (listdir "/home")
                              (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))))
 
-(def user-list (->> (user-generator)
+(if (= __name__ "__main__")
+  (let [[users (->> (user-generator)
                     sort-user-list
                     reversed
-                    (map dir->html)
-                    (.join "\n")))
-
-(print (.format "our esteemed users ({})<br> <sub>generated at {}</sub><br><ul>{}</ul>"
-                (len (list (user-generator)))
-                timestamp
-                user-list))
+                    (map (fn [un] {"username" un
+                                   "default" (default? un)}))
+                    list)]
+        [data {"users" users
+               "active_user_count" (-> (. (facter "active_user_count") stdout)
+                                       .strip
+                                       int)
+               "generated_at" (.strftime (.now datetime) "%Y-%m-%d %H:%M:%S")
+               "num_users" (len users)}]]
+    (print (dumps data))))
