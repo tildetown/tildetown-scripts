@@ -46,13 +46,16 @@
                              (filter (fn [f] (and (not (= f "ubuntu")) (not (= f "poetry")))))))
 
 (if (= __name__ "__main__")
-  (let [[users (->> (user-generator)
-                    sort-user-list
-                    reversed
-                    (map (fn [un] {"username" un
-                                   "default" (default? un)}))
-                    list)]
-        [data {"users" users
+  (let [[all_users (->> (user-generator)
+                        sort-user-list
+                        reversed
+                        (map (fn [un] {"username" un
+                                       "default" (default? un)}))
+                        list)
+         [live_users (-> (filter (fn [u] (not (get u "default"))) all_users)
+                         list)]]
+        [data {"all_users" users
+               "live_users" live_users
                "active_user_count" (-> (. (facter "active_user_count") stdout)
                                        .strip
                                        int)
