@@ -54,11 +54,12 @@
                         list)]
          [live_users (-> (filter (fn [u] (not (get u "default"))) all_users)
                          list)]
-        [data {"all_users" users
+        [data {"all_users" all_users
                "live_users" live_users
                "active_user_count" (-> (. (facter "active_user_count") stdout)
                                        .strip
                                        int)
                "generated_at" (.strftime (.now datetime) "%Y-%m-%d %H:%M:%S")
-               "num_users" (len users)}]]
+               "num_users" (len all_users)
+               "num_live_users" (len live_users)}]]
     (print (dumps data))))
