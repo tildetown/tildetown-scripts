@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{site_name}} guestbook</title>
+  </head>
+  <body>
+    <h1>{{site_name}} guestbook</h1>
+    <marquee behavior="alternate"><em style="font-size:150%">~*~*~*~*~*~*~*~*~*~*~*say hello*~*~*~*~*~*~*~*~*~*~*~</em></marquee>
+    <form action="/guestbook" method="post">
+      <table border="1px">
+        <tr>
+          <th>name!</th>
+          <th>message!</th>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" name="name" />
+          </td>
+          <td>
+            <textarea style="border:0px"name="message" cols="100" rows="10"></textarea>
+          </td>
+      </table>
+      <input style="font-size:200%" type="submit" value="sign"/>
+    </form>
+
+    {% for post in posts %}
+    <p>
+      {{post.name}} says: {{post.message}}
+    </p>
+    {% endfor %}
+  </body>
+</html>
