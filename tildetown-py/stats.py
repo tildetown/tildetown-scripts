@@ -69,7 +69,8 @@ def get_user_data():
 def get_data():
     user_data = get_user_data()
     data = {'generated_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-    return data.update(user_data)
+    data.update(user_data)
+    return data
 
 if __name__ == '__main__':
     print(json.dumps(get_data()))
