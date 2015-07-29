@@ -4,12 +4,11 @@ from os import listdir
 from os.path import getmtime, join
 from datetime import datetime
 from sh import find, facter
-from util import slurp, thread
+from util import slurp, thread, p
 
 # this script emits json on standard out that has information about tilde.town
 # users. It denotes who has not updated their page from the default. It also
 # reports the time this script was run. The user list is sorted by public_html update time.
-
 
 DEFAULT_HTML = slurp("/etc/skel/public_html/index.html")
 
@@ -29,11 +28,13 @@ def guarded_mtime(path):
         return 0
 
 def modify_time(username):
+    p(username)
     files_to_mtimes = partial(map, guarded_mtime)
     return thread(username,
                   username_to_html_path,
                   bounded_find,
                   files_to_mtimes,
+                  p
                   list,
                   max)
 

@@ -9,3 +9,7 @@ def thread(initial, *fns):
     for fn in fns:
         value = fn(value)
     return value
+
+def p(x):
+    print(x)
+    return x
