@@ -4,7 +4,7 @@ from os import listdir
 from os.path import getmtime, join
 from datetime import datetime
 from sh import find, facter
-from .util import slurp, thread
+from util import slurp, thread
 
 # this script emits json on standard out that has information about tilde.town
 # users. It denotes who has not updated their page from the default. It also
