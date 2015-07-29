@@ -34,7 +34,7 @@ def modify_time(username):
                   username_to_html_path,
                   bounded_find,
                   files_to_mtimes,
-                  p
+                  p,
                   list,
                   max)
 
