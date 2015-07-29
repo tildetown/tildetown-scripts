@@ -25,7 +25,7 @@ def bounded_find(path):
 def guarded_mtime(path):
     try:
         return getmtime(path.rstrip())
-    except Exception, e:
+    except Exception as _:
         return 0
 
 def modify_time(username):
