@@ -22,7 +22,7 @@ def bounded_find(path):
     return find(path, "-maxdepth", "3", _ok_code=[0,1])
 
 def active_user_count():
-    return int(wc(sort(cut(who(), "-d' '" "-f1"), "-u"), "-l"))
+    return int(wc(sort(cut(who(), "-d", " ", "-f1"), "-u"), "-l"))
 
 def guarded_mtime(path):
     try:
