@@ -1,13 +1,21 @@
 import json
 import os
+import random
 import time
 from sys import argv
 from tempfile import mkdtemp, mkstemp
 from flask import Flask, render_template, request, redirect
+from stats import get_data
 
 SITE_NAME = 'tilde.town'
 
 app = Flask('~cgi')
+
+_site_context = None
+def site_context():
+    if not _site_context:
+        _site_context = get_data()
+    return _site_context
 
 def slurp(file_path):
     contents = None
@@ -28,7 +36,8 @@ def save_post(name, message):
 
 @app.route('/random', methods=['GET'])
 def get_random():
-    return "RANDOM"
+    user = random.choice(site_context()['live_users'])
+    return redirect('http://tilde.town/~{}'.format(user['username']))
 
 @app.route('/guestbook', methods=['GET'])
 def get_guestbook():
@@ -36,10 +45,10 @@ def get_guestbook():
     # TODO sort by timestamp
     posts = map(lambda p: json.loads(slurp(os.path.join(data_dir, p))), os.listdir(data_dir))
 
-    context= {
-        "site_name": SITE_NAME,
+    context = {
         "posts": posts,
     }
+    context.update(site_context())
     return render_template('guestbook.html', **context)
 
 @app.route('/guestbook', methods=['POST'])
@@ -49,7 +58,7 @@ def post_guestbook():
 
 @app.route('/helpdesk', methods=['GET'])
 def helpdesk():
-    return "HELPDESK"
+    return "HELPDESK UNDER CONSTRUCTION"
 
 if __name__ == '__main__':
     if len(argv) == 2:
