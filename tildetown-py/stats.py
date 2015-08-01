@@ -3,7 +3,7 @@ from functools import partial
 from os import listdir
 from os.path import getmtime, join
 from datetime import datetime
-from sh import find, facter
+from sh import find, uptime, who, sort, wc, cut
 from util import slurp, thread, p
 
 # this script emits json on standard out that has information about tilde.town
@@ -20,6 +20,9 @@ def default_p(username):
 def bounded_find(path):
     # find might return 1 but still have worked fine.
     return find(path, "-maxdepth", "3", _ok_code=[0,1])
+
+def active_user_count():
+    return int(wc(sort(cut(who(), "-d' '" "-f1"), "-u"), "-l"))
 
 def guarded_mtime(path):
     try:
@@ -67,7 +70,11 @@ def get_user_data():
 
 def get_data():
     user_data = get_user_data()
-    data = {'generated_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+    data = {'generated_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'site_name': 'tilde.town',
+            'site_url': 'http://tilde.town',
+            'uptime': uptime('-p'),}
+
     data.update(user_data)
     return data
 
