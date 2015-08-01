@@ -1,11 +1,12 @@
 def slurp(file_path):
     contents = None
     try:
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', encoding="utf-8") as f:
             contents = f.read()
     except FileNotFoundError:
         pass
-    return contents
+    except UnicodeDecodeError:
+        return contents
 
 def thread(initial, *fns):
     value = initial

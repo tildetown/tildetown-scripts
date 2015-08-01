@@ -28,13 +28,11 @@ def guarded_mtime(path):
         return 0
 
 def modify_time(username):
-    p(username)
     files_to_mtimes = partial(map, guarded_mtime)
     return thread(username,
                   username_to_html_path,
                   bounded_find,
                   files_to_mtimes,
-                  p,
                   list,
                   max)
 
