@@ -7,6 +7,17 @@ from tempfile import mkdtemp, mkstemp
 from flask import Flask, render_template, request, redirect
 from stats import get_data
 
+## disgusting hack for python 3.4
+import pkgutil
+orig_get_loader = pkgutil.get_loader
+def get_loader(name):
+    try:
+        return orig_get_loader(name)
+    except AttributeError:
+        pass
+pkgutil.get_loader = get_loader
+###########
+
 SITE_NAME = 'tilde.town'
 
 app = Flask('~cgi')
