@@ -6,7 +6,8 @@ def slurp(file_path):
     except FileNotFoundError:
         pass
     except UnicodeDecodeError:
-        return contents
+        pass
+    return contents
 
 def thread(initial, *fns):
     value = initial
