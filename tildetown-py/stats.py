@@ -21,7 +21,7 @@ def bounded_find(path):
     # find might return 1 but still have worked fine.
     return find(path, "-maxdepth", "3", _ok_code=[0,1])
 
-def active_user_count():
+def get_active_user_count():
     return int(wc(sort(cut(who(), "-d", " ", "-f1"), "-u"), "-l"))
 
 def guarded_mtime(path):
@@ -60,7 +60,7 @@ def get_user_data():
 
     live_users = list(filter(live_p, all_users))
 
-    active_user_count = int(facter("active_user_count").stdout.strip())
+    active_user_count = get_active_user_count()
 
     return {'all_users': all_users,
             'num_users': len(all_users),
