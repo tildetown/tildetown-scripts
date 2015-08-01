@@ -63,7 +63,11 @@ def get_guestbook():
 
 @app.route('/guestbook', methods=['POST'])
 def post_guestbook():
-    save_post(request.form['name'], request.form['message'])
+    message = request.form['message'][0:400]
+    name = request.form['name'][0:140]
+    captcha = request.form['hmm']
+    print(captcha)
+    save_post(name, message)
     return redirect("/guestbook")
 
 @app.route('/helpdesk', methods=['GET'])
@@ -73,7 +77,6 @@ def helpdesk():
 if __name__ == '__main__':
     if len(argv) == 2:
         data_dir = argv[1]
-
     else:
         data_dir = mkdtemp()
 
