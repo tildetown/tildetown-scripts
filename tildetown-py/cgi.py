@@ -1,3 +1,4 @@
+from functools import lru_cache
 import json
 import os
 import random
@@ -22,11 +23,9 @@ SITE_NAME = 'tilde.town'
 
 app = Flask('~cgi')
 
-_site_context = None
+@lru_cache(maxsize=32)
 def site_context():
-    if not _site_context:
-        _site_context = get_data()
-    return _site_context
+    return get_data()
 
 def slurp(file_path):
     contents = None
