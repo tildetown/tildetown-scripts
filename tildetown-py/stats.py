@@ -73,7 +73,7 @@ def get_data():
     data = {'generated_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             'site_name': 'tilde.town',
             'site_url': 'http://tilde.town',
-            'uptime': uptime('-p'),}
+            'uptime': str(uptime('-p')),}
 
     data.update(user_data)
     return data
