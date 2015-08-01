@@ -66,7 +66,7 @@ def post_guestbook():
     message = request.form['message'][0:400]
     name = request.form['name'][0:140]
     captcha = request.form['hmm']
-    if captcha == "scriz":
+    if captcha == "scrop":
         save_post(name, message)
     return redirect("/guestbook")
 
