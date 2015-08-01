@@ -66,8 +66,8 @@ def post_guestbook():
     message = request.form['message'][0:400]
     name = request.form['name'][0:140]
     captcha = request.form['hmm']
-    print(captcha)
-    save_post(name, message)
+    if captcha == "scriz":
+        save_post(name, message)
     return redirect("/guestbook")
 
 @app.route('/helpdesk', methods=['GET'])
