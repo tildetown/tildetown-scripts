@@ -1,7 +1,10 @@
 def slurp(file_path):
     contents = None
-    with open(file_path, 'r') as f:
-        contents = f.read()
+    try:
+        with open(file_path, 'r') as f:
+            contents = f.read()
+    except FileNotFoundError:
+        pass
     return contents
 
 def thread(initial, *fns):

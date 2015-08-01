@@ -19,7 +19,7 @@ def default_p(username):
 
 def bounded_find(path):
     # find might return 1 but still have worked fine.
-    return find(path, "-maxdepth" "3", _ok_code=[0,1])
+    return find(path, "-maxdepth", "3", _ok_code=[0,1])
 
 def guarded_mtime(path):
     try:
