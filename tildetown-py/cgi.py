@@ -53,10 +53,12 @@ def get_random():
 def get_guestbook():
     data_dir = app.config['DATA_DIR']
     # TODO sort by timestamp
-    posts = map(lambda p: json.loads(slurp(os.path.join(data_dir, p))), os.listdir(data_dir))
+    filename_to_json = lambda p: json.loads(slurp(os.path.join(data_dir, p)))
+    posts = map(filename_to_json, os.listdir(data_dir))
+    sorted_posts = sorted(posts, key=lambda p: p['timestamp'])
 
     context = {
-        "posts": posts,
+        "posts": sorted_posts,
     }
     context.update(site_context())
     return render_template('guestbook.html', **context)
