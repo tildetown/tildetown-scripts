@@ -83,4 +83,6 @@ if __name__ == '__main__':
     app.config['DEBUG'] = True
     app.config['DATA_DIR'] = data_dir
 
+    print("Running with data_dir=", app.config['DATA_DIR'])
+
     app.run()
