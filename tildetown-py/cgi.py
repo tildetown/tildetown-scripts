@@ -55,7 +55,7 @@ def get_guestbook():
     # TODO sort by timestamp
     filename_to_json = lambda p: json.loads(slurp(os.path.join(data_dir, p)))
     posts = map(filename_to_json, os.listdir(data_dir))
-    sorted_posts = sorted(posts, key=lambda p: p['timestamp'])
+    sorted_posts = sorted(posts, key=lambda p: p['timestamp'], reverse=True)
 
     context = {
         "posts": sorted_posts,
