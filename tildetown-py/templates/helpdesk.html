@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> {{ site_name }} help desk </title>
+    <link rel="stylesheet" href="{{ site_url }}/style.css">
+  </head>
+  <body>
+    <h1>{{ site_name }} help desk</h1>
+    <p>
+      hi! this form exists to make it a little easier for {{ site_name }} admins
+      to help people out with system issues like logging in, installing
+      packages, and general questions about how to do stuff.
+    </p>
+
+    <p>
+      in using this system, recall that there are only a handful of admins and
+      you'll get a response (by email) as they are able to help out.
+    </p>
+
+    <p>
+      thanks!
+    </p>
+
+    {% if status == 'fail' %}
+    <p style="background-color:red">
+      oops, sorry! that didn't work. either something is wrong on the server or
+      there was a problem with the form..try again?
+    </p>
+    {% endif %}
+
+    {% if status == 'success' %}
+    <p style="background-color:green">
+      hooray, your request has been sent.
+    </p>
+    {% endif %}
+
+    <form method="post">
+      <p>
+        name: <input type="text" name="name" maxlength="140">
+      </p>
+      <p>
+        email: <input type="email" name="email" maxlength="140" required="true">
+      </p>
+      <p>
+        type of issue:
+        <select name="type">
+          <option value="login">help logging in</option>
+          <option value="concern">concern about the site or another user</option>
+          <option value="package">new package installed</option>
+          <option value="question">a question</option>
+          <option value="other">something else</option>
+        </select>
+      </p>
+      <p>
+        describe your issue (in 500 characters or less):<br>
+        <textarea name="desc" required="true" rows="10" cols="50" maxlength="500">{{desc}}</textarea>
+      </p>
+      <p>
+        are you a robot?<br>
+        <input type="radio" name="hmm" value="scriz" checked="true">yeah<br>
+        <input type="radio" name="hmm" value="scrop">nope<br>
+      </p>
+      <p>
+        <input type="submit" value="<3">
+      </p>
+    </form>
+  </body>
+</html>

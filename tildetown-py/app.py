@@ -5,10 +5,14 @@ import random
 import time
 from sys import argv
 from tempfile import mkdtemp, mkstemp
+
+from pyhocon import ConfigFactory
+import requests
 from flask import Flask, render_template, request, redirect
+
 from stats import get_data
 
-## disgusting hack for python 3.4
+## disgusting hack for python 3.4.0
 import pkgutil
 orig_get_loader = pkgutil.get_loader
 def get_loader(name):
@@ -17,11 +21,16 @@ def get_loader(name):
     except AttributeError:
         pass
 pkgutil.get_loader = get_loader
-###########
+##########
 
 SITE_NAME = 'tilde.town'
 
 app = Flask('~cgi')
+
+@lru_cache(maxsize=32)
+def cfg(k):
+    conf = ConfigFactory.parse_file('cfg.conf')
+    return conf[k]
 
 @lru_cache(maxsize=32)
 def site_context():
@@ -73,8 +82,43 @@ def post_guestbook():
     return redirect("/guestbook")
 
 @app.route('/helpdesk', methods=['GET'])
-def helpdesk():
-    return "HELPDESK UNDER CONSTRUCTION"
+def get_helpdesk():
+    status = request.args.get('status', 'unsubmitted')
+    desc = request.args.get('desc', '')
+    context = {
+        'status': status,
+        'desc': desc,
+    }
+    context.update(site_context())
+    return render_template('helpdesk.html', **context)
+
+def send_email(data):
+    name = data.get('name', 'anonymous')
+    email = data['email']
+    request_type = data['type']
+    desc = request.form['desc']
+    response = requests.post(
+        cfg('mailgun_url'),
+        auth=("api", cfg('mailgun_key')),
+        data={"from": "root@tilde.town",
+              "to": cfg('trello'),
+              "subject": "{} from {} <{}>".format(request_type, name, email),
+              "text": desc})
+
+    return response.status_code == 200
+
+@app.route('/helpdesk', methods=['POST'])
+def post_helpdesk():
+    desc = request.form['desc']
+    captcha = request.form['hmm']
+
+    if captcha == 'scrop':
+        status = "success" if send_email(request.form) else "fail"
+    else:
+        status = "fail"
+
+    # should we bother restoring other fields beside desc?
+    return redirect('/helpdesk?status={}&desc={}'.format(status, desc))
 
 if __name__ == '__main__':
     if len(argv) == 2:
