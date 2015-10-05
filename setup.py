@@ -19,5 +19,4 @@ setup(
     keywords='community',
     packages=['tildetown'],
     install_requires = ['pyhocon==0.3.10', 'sh==1.11', 'Flask==0.10.1', 'requests==2.7.0'],
-    include_package_data = True,
 )
