@@ -10,7 +10,7 @@ from pyhocon import ConfigFactory
 import requests
 from flask import Flask, render_template, request, redirect
 
-from stats import get_data
+from tildetown.stats import get_data
 
 ## disgusting hack for python 3.4.0
 import pkgutil

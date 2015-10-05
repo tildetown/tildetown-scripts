@@ -4,11 +4,13 @@ from os import listdir
 from os.path import getmtime, join
 from datetime import datetime
 from sh import find, uptime, who, sort, wc, cut
-from util import slurp, thread, p
+from tildetown.util import slurp, thread, p
 
 # this script emits json on standard out that has information about tilde.town
 # users. It denotes who has not updated their page from the default. It also
 # reports the time this script was run. The user list is sorted by public_html update time.
+
+SYSTEM_USERS = ['wiki', 'root', 'ubuntu', 'nate']
 
 DEFAULT_HTML = slurp("/etc/skel/public_html/index.html")
 
@@ -43,7 +45,7 @@ def sort_user_list(usernames):
     return sorted(usernames, key=modify_time)
 
 def user_generator():
-    ignore_system_users = lambda f: f != "ubuntu" and f != "poetry"
+    ignore_system_users = lambda un: un not in SYSTEM_USERS
     return filter(ignore_system_users, listdir("/home"))
 
 def get_user_data():
