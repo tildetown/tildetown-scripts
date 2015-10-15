@@ -5,6 +5,7 @@ import random
 import time
 from sys import argv
 from tempfile import mkdtemp, mkstemp
+import logging
 
 from pyhocon import ConfigFactory
 import requests
@@ -55,16 +56,20 @@ def get_random():
 
 @app.route('/guestbook', methods=['GET'])
 def get_guestbook():
+    logging.debug('loading guestbook')
     data_dir = app.config['DATA_DIR']
     # TODO sort by timestamp
     filename_to_json = lambda p: json.loads(slurp(os.path.join(data_dir, p)))
     posts = map(filename_to_json, os.listdir(data_dir))
     sorted_posts = sorted(posts, key=lambda p: p['timestamp'], reverse=True)
 
+    logging.debug('found {} posts'.format(len(sorted_posts)))
+
     context = {
         "posts": sorted_posts,
     }
     context.update(site_context())
+    logging.debug('rendering template...')
     return render_template('guestbook.html', **context)
 
 @app.route('/guestbook', methods=['POST'])
@@ -121,11 +126,15 @@ if __name__ == '__main__':
 
     conf = ConfigFactory.parse_file('cfg.conf')
 
+    logfile = conf.get('logfile', '/tmp/cgi.log')
+    logging.basicConfig(filename=logfile, level=logging.DEBUG)
+
     app.config['DATA_DIR'] = conf['guestbook_dir']
     app.config['TRELLO_EMAIL'] = conf['trello_email']
     app.config['MAILGUN_URL'] = conf['mailgun_url']
     app.config['MAILGUN_KEY'] = conf['mailgun_key']
 
-    print("Running with data_dir=", app.config['DATA_DIR'])
+    logging.debug("Running with data_dir=", app.config['DATA_DIR'])
+    logging.debug(app.config)
 
     app.run()
