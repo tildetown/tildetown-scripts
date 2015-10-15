@@ -28,11 +28,6 @@ SITE_NAME = 'tilde.town'
 app = Flask('~cgi')
 
 @lru_cache(maxsize=32)
-def cfg(k):
-    conf = ConfigFactory.parse_file('cfg.conf')
-    return conf[k]
-
-@lru_cache(maxsize=32)
 def site_context():
     return get_data()
 
@@ -98,10 +93,10 @@ def send_email(data):
     request_type = data['type']
     desc = request.form['desc']
     response = requests.post(
-        cfg('mailgun_url'),
-        auth=("api", cfg('mailgun_key')),
+        app.config['MAILGUN_URL'],
+        auth=("api", app.config['MAILGUN_KEY']),
         data={"from": "root@tilde.town",
-              "to": cfg('trello'),
+              "to": app.config['TRELLO_EMAIL'],
               "subject": "{} from {} <{}>".format(request_type, name, email),
               "text": desc})
 
@@ -121,13 +116,15 @@ def post_helpdesk():
     return redirect('/helpdesk?status={}&desc={}'.format(status, desc))
 
 if __name__ == '__main__':
-    if len(argv) == 2:
-        data_dir = argv[1]
-    else:
-        data_dir = mkdtemp()
-
     app.config['DEBUG'] = True
-    app.config['DATA_DIR'] = data_dir
+    # tension between this and cfg function...
+
+    conf = ConfigFactory.parse_file('cfg.conf')
+
+    app.config['DATA_DIR'] = conf['guestbook_dir']
+    app.config['TRELLO_EMAIL'] = conf['trello_email']
+    app.config['MAILGUN_URL'] = conf['mailgun_url']
+    app.config['MAILGUN_KEY'] = conf['mailgun_key']
 
     print("Running with data_dir=", app.config['DATA_DIR'])
 
