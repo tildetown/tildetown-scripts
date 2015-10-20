@@ -5,6 +5,7 @@ from os.path import getmtime, join
 from datetime import datetime
 from sh import find, uptime, who, sort, wc, cut
 from tildetown.util import slurp, thread, p
+import subprocess
 
 # this script emits json on standard out that has information about tilde.town
 # users. It denotes who has not updated their page from the default. It also
@@ -12,12 +13,14 @@ from tildetown.util import slurp, thread, p
 
 SYSTEM_USERS = ['wiki', 'root', 'ubuntu', 'nate']
 
-DEFAULT_HTML = slurp("/etc/skel/public_html/index.html")
+DEFAULT_HTML_FILENAME = "/etc/skel/public_html/index.html"
 
 username_to_html_path = lambda u: "/home/{}/public_html".format(u)
 
 def default_p(username):
-    return DEFAULT_HTML == slurp(join(username_to_html_path(username), "index.html"))
+    return subprocess.call(
+            ['diff', '-q', DEFAULT_HTML_FILENAME, user_html_filename],
+            stdout=subprocess.DEVNULL) == 0
 
 def bounded_find(path):
     # find might return 1 but still have worked fine.
