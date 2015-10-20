@@ -135,8 +135,6 @@ def tdp_user(username, homedir):
             'title': get_title(index_html),
             'mtime': int(most_recent_within(public_html) * 1000),
             # tilde.town extensions and backward compatibility
-            # FIXME: just shelling out to diff -q might be way faster than all
-            # these hashes.
             'favicon': 'TODO',
             'default': subprocess.call(
                 ['diff', '-q', DEFAULT_HTML_FILENAME, index_html],
@@ -176,17 +174,7 @@ def tdp():
         'generated_at': now.strftime('%Y-%m-%d %H:%M:%S'),
         'generated_at_msec': int(now.timestamp() * 1000),
         'uptime': subprocess.check_output(['uptime', '-p'], universal_newlines=True),
-        })
-    # redundant entries we should drop after changing homepage template
-    data.update({
-        'all_users': data['users'],
-        'num_users': data['user_count'],
-        'live_users': [u for u in data['users'] if not u['default']],
-        'site_name': data['name'],
-        'site_url': data['url'],
-        })
-    data.update({
-        'num_live_users': len(data['live_users']),
+        'live_user_count': sum(1 for x in data['users'] if not x['default']),
         })
 
     return data

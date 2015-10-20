@@ -22,16 +22,18 @@
         <tr>
           <td valign="top" width="20%">
             <h3>our esteemed users </h3>
-            <sub>({{num_live_users}} / {{num_users}} shown)</sub><br>
+            <sub>({{live_user_count}} / {{user_count}} shown)</sub><br>
             <sub>generated at {{generated_at}}</sub><br>
             <sub>sorted by recent changes</sub><br>
 
             <ul>
-              {{#live_users}}
-              <li>
-                <a href="/~{{username}}">{{username}}</a>
-              </li>
-              {{/live_users}}
+              {{#users}}
+                {{^default}}
+                  <li>
+                    <a href="/~{{username}}">{{username}}</a>
+                  </li>
+                {{/default}}
+              {{/users}}
             </ul>
             <a href="/users.html">full user list</a>
           </td>
