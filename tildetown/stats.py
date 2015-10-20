@@ -107,7 +107,7 @@ def most_recent_within(path):
     """Return the most recent timestamp among all files within path, 3
     levels deep.
     """
-    return max(modified_times(path), maxdepth=3)
+    return max(modified_times(path, maxdepth=3))
 
 def modified_times(path, maxdepth=None):
     """Walk the directories in path, generating timestamps for all
@@ -119,7 +119,7 @@ def modified_times(path, maxdepth=None):
         for f in files:
             try:
                 yield os.path.getmtime(os.path.join(root, f))
-            except FileNotFoundError:
+            except (FileNotFoundError, PermissionError):
                 pass
 
 def tdp_user(username, homedir):
