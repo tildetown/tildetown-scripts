@@ -5,7 +5,7 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/ga
 source /var/local/venvs/tildetown/bin/activate
 
 stats=/usr/bin/stats
-template=/var/www/tilde.town/template.index.html
+template=/var/local/tildetown/templates/frontpage.html
 mustache=/var/local/tildetown/scripts/mustache.hy
 output_path=/var/www/tilde.town/index.html
 
