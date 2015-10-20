@@ -49,24 +49,12 @@ stats.py, which is of the form:
 Usage: stats.py > /var/www/html/tilde.json
 """
 
-# I suppose I could import /var/local/tildetown/tildetown-py/stats.py which
-# does much of the same work, but I wanted to try to make one that needs no
-# venv nor 'sh' module. (Success.) Bonus: this runs in 0.127s, vs 5.2s
-# for 'stats'
-
-# FIXME: we output quite a bit of redundant data. I think we should lose
-# 'live_users' and do that filtering on the client side.
-
-# FIXME: If we're the only consumer of the stats.py data, let's change the
-# client side to use 'users' and drop 'all_users'.
-
 import datetime
 import hashlib
 import json
 import os
 import pwd
 import re
-import struct
 import subprocess
 
 SYSTEM_USERS = ['wiki', 'root', 'ubuntu', 'nate', 'nobody']
