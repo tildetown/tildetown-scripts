@@ -46,7 +46,7 @@ stats.py, which is of the form:
     'uptime': (string) output of `uptime -p`
 
 }
-Usage: tdp.py > /var/www/html/tilde.json
+Usage: stats.py > /var/www/html/tilde.json
 """
 
 # I suppose I could import /var/local/tildetown/tildetown-py/stats.py which
