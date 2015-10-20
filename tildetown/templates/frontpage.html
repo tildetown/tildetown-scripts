@@ -2,230 +2,101 @@
     <head>
         <title>welcome to tilde town!</title>
 <meta charset="utf-8">
-        <style type="text/css">
-            body {
-              background-color: pink;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="/favicon.ico" />
     </head>
     <body>
-        <h1>tilde.town is a small unix server built for sharing</h1>
-<marquee><strong>~*~*~* {{active_user_count}} townies active right now *~*~*~</strong></marquee>
-<marquee><em><a href="https://www.patreon.com/nathanielksmith">donate</a> to tilde.town</a></em></marquee>
-<table>
-<tr>
-  <td style="width:25%">
-<h2>users</h2>
-our esteemed users ({{num_users}})<br> 
-<sub>generated at {{generated_at}}</sub><br>
+      <h1 style="text-align:center">tilde.town</h1>
+      <h3 style="text-align:center"><em>is a small unix server made for sharing</em></h3>
+      <p style="text-align:center">
+        <a href="/~wiki/faq.html">faq</a>
+        | <a href="/guestbook">sign our guestbook</a>
+        | <a href="http://goo.gl/forms/8IvQFTDjlo">signup</a>
+        | <a href="/~wiki/conduct.html">code of conduct</a>
+        | <a href="/helpdesk">file help ticket</a>
+        | <a href="https://www.patreon.com/nathanielksmith">donate</a>
+        | <a href="/~wiki">wiki</a>
+      </p>
+<marquee behavior="alternate"><strong>~*~*~* {{active_user_count}} townies active right now *~*~*~</strong></marquee>
+      <table width="100%">
+        <tr>
+          <td valign="top" width="20%">
+            <h3>our esteemed users </h3>
+            <sub>({{num_live_users}} / {{num_users}} shown)</sub><br>
+            <sub>generated at {{generated_at}}</sub><br>
+            <sub>sorted by recent changes</sub><br>
 
-<ul>
-  {{#users}}
-  <li>
-    <a href="http://tilde.town/~{{username}}">{{username}}</a>
-    {{#default}}(default :3){{/default}}
-  </li>
-  {{/users}}
-</ul>
-</td>
-  <td valign="top">
-  <h2>what is the tilde.town?</h2>
-  <p>tilde.town is an intentional community focused on <b>radical inclusivity</b> and the <b>creation of digital art</b>. We strive to create a place that is open to people of all backgrounds and technical ability and strive together to make beautiful works of art that can be conveyed via the web.</p>
- <h2>how do i join tilde.town?</h2>
-  <p>sign up with this fancy form, here! it takes a few days since there is
-just one person managing the signups and each user must be manually added.
-Please read our <a href="http://tilde.town/~wiki/conduct.html">code of
-conduct</a> and only sign up if you agree to be bound by it.</p>
-<h3><a href="http://goo.gl/forms/8IvQFTDjlo">sign up form</a></h3>
-  <h2>what isn't tilde.town?</h2>
-  <p>it's never super fun to define stuff in a negative sense, but there has been a lot of confusion around what tilde.town is and isn't. tilde.town is <i>not</i> a startup. it is <i>not</i> commercial in any way. tilde.town, as a side effect, has features of a social network but it is not intended to be the "next" anything (except maybe geocities or angelfire). tilde.town is <b>not</b> <a href="http://tilde.club">tilde.club</a> but is inspired by it.</p>
- <h2>who is tilde.town?</h2>
-<p>tilde.town is made up of its members. we are a group of creative folk
-interested in peer education and digital art. the founder is <a
-href="http://tilde.town/~vilmibm">~vilmibm</a> whom you are more than welcome to
-talk at via <a href="https://twitter.com/nate_smith">twitter</a> or <a
-href="mailto:nathanielksmith@gmail.com">email</a>.</p>
- <h2>why tilde.town?</h2>
-<p>making websites is harder than ever; everything that
-can be commercialized is being commercialized; knowledge is being carved up and
-locked away for profit; software is increasingly proprietary and bloated.
-tilde.town is an experiment in reclaiming a bygone era of low-barrier,
-judgement-free, low stakes expression with a focus on low-tech art and
-pseudonymous creation.</p>
-</td>
-  <td valign="top">
-<h2>tilde town news</h2>
+            <ul>
+              {{#live_users}}
+              <li>
+                <a href="/~{{username}}">{{username}}</a>
+              </li>
+              {{/live_users}}
+            </ul>
+            <a href="/users.html">full user list</a>
+          </td>
+          <td valign="top" width="40%">
+            <p>this site is an intentional digital community for creating and
+            sharing works of art, educating peers, and technological
+            anachronism. we are a completely
+            non-commercial, <a href="https://www.patreon.com/nathanielksmith?ty=h">donation supported</a>, and
+            committed to rejecting false technological progress in favor of
+            empathy and sustainable computing.</p>
 
-<h3>donations! also, new disk</h3>
-<p><sub><em>Wed Apr 29 06:04:58 UTC 2015</em></sub></p> <p>An exciting day for
-tilde.town. We now have way to donate via <a
-href="https://www.patreon.com/nathanielksmith">patreon</a>. Thanks to all the
-folx who have already become patrons! y'all make the heart of this sysadmin
-warm and fuzz. A big part of the push for donations was a need for more server
-space which we have as of tonight's server upgrade/reboot. The main tilde.town
-server now has a 40gb disk. Enjoy!</p>
+            <h3>stuff you can do here</h3>
+            <ul>
+              <li>geocities style hosting</li>
+              <li>internal irc network</li>
+              <li>private usenet constellation</li>
+              <li>internal mail</li>
+              <li>command line / unix tutelage</li>
+              <li>make ascii art</li>
+              <li>host twitter bots</li>
+              <li>participate in our <a href="https://twitter.com/tildetown">communal twitter</a></li>
+              <li>generate random poetry <em>(under construction)</em></li>
+            </ul>
 
-<p>Some updates coming down the pipe:
-<ul>
- <li>2gb quota for all users</li>
- <li>fixed poetry server</li>
- <li>better signup process/docs</li>
-</ul>
-</p>
+            <a style="text-decoration:none" href="/cgi/random">
+            <pre title="go to a random page">
 
-<h3>welcome haiku</h3>
-<p><sub><em> Thu Mar  5 21:19:42 UTC 2015</em></sub></p>
-<p>If you signed up in the last two months or so you had a bum welcome present
-in your /home. the script has been fixed and now everyone retroactively has a
-welcome haiku in their home directory. enjoy.</p>
-
-<h3>server restart</h3>
-<p><sub><em>Tue Jan 27 21:13:27 UTC 2015</em></sub></p>
-<p>Hi. Today tilde.town had to restart to pick up a patch for <a
-href="http://seclists.org/oss-sec/2015/q1/276">CVE 2015-0235</a>.
-data.tilde.town (our poetry server) has also been patched and restated. Sorry
-for any inconvenience!</p>
-
-<h3>lots of people</h3>
-<p><sub><em>Thu Jan  1 07:37:16 UTC 2015</em></sub></p>
-<p>we have ~370 users. isn't that wild?</p>
-
-<h3>Scheduled Downtime Tonight</h3>
-<p><sub><em>Wed Nov 26 21:19:12 UTC 2014</em></sub></p>
-
-<p>To accommodate our growing user base, there will be a server resize/reboot
-tonight (Pacific time). Sadly I cannot give an exact time as I still don't have
-internet at my new place and will have to opportunistically find some to
-execute this upgrade.</p>
-<p>The server should only be down for a few minutes, but this will terminate
-any running applications (like tmux/screen/irssi). Any files open in an editor
-should be preserved by a swap file but you still may want to save and close
-things in the next several hours.</p>
-<p>Also, this upgrade means that tilde.town is no longer an essentially free
-project, so I may put up something for donations soon.</p>
-
-<h3>100+ users party report</h3>
-<p><sub><em>Sun Nov  9 23:07:08 UTC 2014</em></sub></em>
-<p>tilde.town now has 102 users. We crossed into three digits last night and
-lots of townies hung out in irc to celebrate. Some new features even
-launched!</p>
-
-<ul>
-  <li>the homepage userlist is now sorted by modified time</li>
-  <li>there is now a shared <pre>tweet</pre> command that all users can use to tweet to the <a href="http://twitter.com/tildetown">@tildetown</a> account (protip: <pre>haiku | tweet</pre>)</li>
-  <li>run <pre>random_pokemon.sh</pre> to get a random ascii art pokemon (thanks, <a href="http://tilde.town/~sanqui">~sanqui</a>)</li>
-  <li>an insane <a href="http://tilde.town/~wiki">git-based wiki</a> that all townies can edit (thanks for the help, <a href="http://tilde.town/~datagrok">~datagrok</a>)</li>
-  <li>an IRC bot (thanks, <a href="http://tilde.town/~selfsame">~selfsame</a>) that plays numberwang</li>
-  <li>even moar learnings up on the page of <a href="http://tilde.town/~shanx">~shanx</a></li>
-  <li>general good feels</li>
-</ul>
-
-<h3>80 users!</h3>
-<p><sub><em>Wed Oct 29 18:19:45 UTC 2014</em></sub></em>
-
-<p>tilde.town just added its 80th user. Welcome! Some folks have been having
-trouble with ssh public keys. Remember, public keys are really confusing if you
-aren't too familiar with them, and there is no judgement if you can't
-immediately get them to work. Feel free to tweet at <a
-href="https://twitter.com/tildetown">@tildetown</a> or send an email to <a
-href="mailto:nks@lambdaphil.es">~vilmibm</a> if you'd like some help.</p>
-
-</p>
-
-<h3>60 users</h3>
-<p><sub><em>Sat Oct 25 19:37:47 UTC 2014</em></sub></em>
-<p>tilde.town is up to 60 users. This is lovely! It is also only a tenth of our
-planned total user capacity, so if you are interested in a tilde* account we'd
-love to have you. You can even submit a user request with a fancy form now!</p>
-
-<p>
-<strong><a href="http://goo.gl/forms/8IvQFTDjlo">submit a user account request!</a></strong>
-</p>
-</p>
-
-<h3>Change of IP, warnings when you ssh</h3>
-<p><sub><em>Sun Oct 19 03:28:59 UTC 2014</em></sub></p>
-<p>
-  In the interest of making sure we don't suddenly disappear from the Internet
-as a result of a dynamic IP change on AWS I switched to using an Elastic
-IP (amusingly, "elastic" IPs are static).
-</p>
-
-<p>
-The upside is that we now have a static IP (also it's free) (woo).
-</p>
-
-<p>
-The downside is that when you try to SSH into tilde.town, now, you'll get an
-error about "something nasty" and there will be many @ characters. You'll want
-to edit your .ssh/known_hosts file and remove the entry for tilde.town (your
-error message should have a cute copy-pasta-able one-liner for doing this for
-you).
-</p>
-
-<p>
-Go ahead and do that, and then log in With Confidence. Hopefully this won't happen again.
-</p>
-
-<p>
-I'll close by mentioning the imminent arrival of many new tildeverse members. We (the tildeverse operators) are just about ready to accept the signups currently languishing in a waitlist. This means lots of new users, which is lovely, but may mean some growing pains while I adapt our server to the new user load in the most cost-effective way.
-</p>
-
-</td>
-</tr>
-</table>
-<table>
-<tr>
-<td>
-        <pre>
- Have you guess 'd you yourself would not continue?
- The wanderer would not heed me
-`` He told me at parting, that he should soon write
- Mr. Elton looked all happiness at this proposition
- what is it to us what the rest do or think?
- I doubted it more the next day on Box Hill
-
- Come thou, arise from the ground unto the place yonder
- One was the son of Mars, and was killed before Troy
- He had done his duty and could return to his son.
- I never saw any thing so outree!
-; woods, together with mountains, are on fire.
-`` He told me at parting, that he should soon write
-
-`` He told me at parting, that he should soon write
-; and, abhorring the light, they fly { abroad} by night.
- Can not you guess what this parcel holds?''
- And these things I see suddenly, what mean they?
- And you, paid to defile the People
- Very strongly may be sincerely fainting.
-
- she cried with a most open eagerness
-`` He told me at parting, that he should soon write
- Let me hear from you without delay
- By him she was put in mind of what she might do
-; but Emma 's countenance was as steady as her words.
- Dear Miss Woodhouse, do advise me.''
-
- It was certainly ‘barbara’ in the eyes of a Greek
- One can not creep upon a journey
- One was the son of Mars, and was killed before Troy
-`` He told me at parting, that he should soon write
-[ 77 and struck the guilty{ draught} from his mouth.
-; The golden sun of June declines, It has not caught her eye.
-
- Clarke translates ‘miseri senis ore,
-: naught there is Save body, having property of touch.
- Alas poor boy, he will never be better,
-; but if he wished to do it, it might be done.
-`` He told me at parting, that he should soon write
- One was the son of Mars, and was killed before Troy
-
- I knew who it came from. The virgin shrieks aloud
- To feel the presence of a brave commanding officer But she was always right.
- I 'd rather you would.'' This was a river of Troy
-</pre>
-</td>
-<td>
+ |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+ |                         !                        /\    |  X  |
+ |                         !                       //\\   | / \ |
+ |      @@@                ! |~~~~~~~~~~~~~|      ///\\\  |/   \|
+ |     @@@@@              /i\|=============|     ////\\\\ |\   /|
+ |      @@@              /(i)\====== == ===|    /////\\\\\| \ / |
+ |                      /((i))\============|   //////\\\\\\  X  |
+ |                      |% % %|=== ===== ==|   I||||||||||I / \ |
+ |                      |% % %|====== =====|   I||||||||||I/   \|
+ |:::                   |% # %|============|   I||||||||||I\   /|
+ |:::                   |% % %|= ====== ===|   I||||||||||I \ / |
+ |:::                   |% % #|==== ==+++++++++++++|||||||I  X  |
+ |:::HHHHHHHHHHHH       |% % %|=======! ! ! ! ! ! !|||||||I / \ |
+ |:::HHHHHH HHHHH       |% # %|= =====! ! ! ! ! ! !|||||||I/   \|
+ |:::HHHHHHHHHHHH       |# % %|=== ===! ! ! ! ! ! !|||||||I\   /|
+ |:::HHH HHHHHHHH       |% % %|=======! ! ! ! ! ! !|||||||I \ / |
+ |:::HHHHHHTTTTTTTTTTTTTTT % #|== = ==! ! ! ! ! ! !|||||||I  X  |
+ |:::HHHHHHI [] [] [] [] I # #|=======! ! ! ! ! ! !|||||||I / \ |
+ |::: HHHHHI [] [] [] [] I % %|====  =! ! ! ! ! ! !|||||||I/   \|
+ |:::HHHH HI [] [] [] [] I # %|== ====! ! ! ! ! ! !|||||||I\   /|
+ |:::HHHHHHI [] [] [] [] I % %|=======! ! ! ! ! ! !|||||||I \ / |
+ |:::HHHHHHI [] [] [] [] I % #|=== = =! ! ! ! ! ! !|||||||I  X  |
+ |:::HH HHHI [] [] [] [] I % #| ======! ! ! ! ! ! !|||||||I / \ |
+ |:::HHHHHHI [] [] [] [] I # #|= = ===! ! ! ! ! ! !|||||||I/   \|
+ |:::HHHHH I [] [] [] [] I % %|==== ==! ! ! ! ! ! !|||||||I\   /|
+ |:::HHHHHHI [] [] [] [] I % #|=======! ! ! ! ! ! !|||||||I \ / |
+ |:::HHHHHHI [] [] [] [] I # #|= =====! ! ! ! ! ! !|||||||I  X  |
+ |:::H HHHHI [] [] [] [] I # #|=== = =! ! ! ! ! ! !|||||||I / \ |
+ |:::HHHHHHI [] [] [] [] I # #|=======! ! ! ! ! ! !|||||||I/   \|
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              
+    o  | |    |                               
+_|_    | |  __|   _  _|_  __           _  _   
+ |  |  |/  /  |  |/   |  /  \_|  |  |_/ |/ |  
+ |_/|_/|__/\_/|_/|__/o|_/\__/  \/ \/    |  |_/
+              </pre>
+            </a>
+            <hr>
 <pre>
 orators, singers, musicians to come!
  She will break it to you better than I can.
@@ -273,10 +144,293 @@ orators, singers, musicians to come!
  Any nonsense will serve. the flesh over and over!
  Eleves, I salute you!`` I not aware!'
 </pre>
+<hr>
+        <pre>
+ Have you guess 'd you yourself would not continue?
+ The wanderer would not heed me
+`` He told me at parting, that he should soon write
+ Mr. Elton looked all happiness at this proposition
+ what is it to us what the rest do or think?
+ I doubted it more the next day on Box Hill
+
+ Come thou, arise from the ground unto the place yonder
+ One was the son of Mars, and was killed before Troy
+ He had done his duty and could return to his son.
+ I never saw any thing so outree!
+; woods, together with mountains, are on fire.
+`` He told me at parting, that he should soon write
+
+`` He told me at parting, that he should soon write
+; and, abhorring the light, they fly { abroad} by night.
+ Can not you guess what this parcel holds?''
+ And these things I see suddenly, what mean they?
+ And you, paid to defile the People
+ Very strongly may be sincerely fainting.
+
+ she cried with a most open eagerness
+`` He told me at parting, that he should soon write
+ Let me hear from you without delay
+ By him she was put in mind of what she might do
+; but Emma 's countenance was as steady as her words.
+ Dear Miss Woodhouse, do advise me.''
+
+ It was certainly ‘barbara’ in the eyes of a Greek
+ One can not creep upon a journey
+ One was the son of Mars, and was killed before Troy
+`` He told me at parting, that he should soon write
+[ 77 and struck the guilty{ draught} from his mouth.
+; The golden sun of June declines, It has not caught her eye.
+
+ Clarke translates ‘miseri senis ore,
+: naught there is Save body, having property of touch.
+ Alas poor boy, he will never be better,
+; but if he wished to do it, it might be done.
+`` He told me at parting, that he should soon write
+ One was the son of Mars, and was killed before Troy
+
+ I knew who it came from. The virgin shrieks aloud
+ To feel the presence of a brave commanding officer But she was always right.
+ I 'd rather you would.'' This was a river of Troy
+</pre>
+          </td>
+          <td valign="top" width="40%">
+            <h3>news</h3>
+
+            <h4>Systems status</h4>
+            <p><sub><em>Wed Oct 14 13:49:12 PDT 2015</em></sub></p>
+            <p>
+                ~vilmibm released a rewrite to the server's infrastructure yesterday. Nothing should be different, but it'll be much easier to work on new features and consume fewer resources.
+            </p>
+            <p>
+                Currently, the <strong>guestbook</strong> is down. Usenet has also been disabled for now since no one was using it and it has a nontrivial impact on the system. If you want to talk about bringing usenet back, bring it up in irc &lt;3.
+            </p>
+
+
+            <h4>BIRTHDAY! The Town Turns 1</h4>
+            <p><sub><em>Sun Oct 11 18:54:35 UTC 2015</em></sub></p>
+            <p>
+            Exactly a year ago, <a href="/~vilmibm">~vilmibm</a> gave himself
+            a birthday present in the form of a small unix server meant for
+            commnunity and sharing. Now, tilde.town is a thriving community of
+            feels, peer education and beautiful digital art.
+            </p>
+            <p>
+            If you are not yet a towner, check out our <a
+            href="http://tilde.town/~wiki/conduct.html">code of conduct</a>,
+          look at some user pages, and <a
+          href="https://docs.google.com/forms/d/1FSv_-gEU9LDy0b5gL8xm23d5QomMHIIstgr_fL5GFmg/viewform?c=0&w=1">sign
+          up!</a>. Everyone is welcome here regardless of skill level and if
+        making SSH keys is a little scary, that's okay. Reach out to <a
+        href="https://twitter.com/tildetown">for help</a>.
+            </p>
+            <p>
+            <strong>Here's to another year of html and feels.</strong>
+            </p>
+
+            <h4>new stuff!</h4>
+            <p><sub><em>Sat Aug  1 17:27:15 PDT 2015</em></sub></p>
+            <p>
+              today was a day of things happening!
+              <ul>
+                <li>the first ever tilde.town volunteer admin meeting happened today. <a href="/~insom">~insom</a>, <a href="/~krowbar">~krowbar</a>, and <a href="/~vilmibm">~vilmibm</a> all met to talk about the future tilde.town and how to ease the burden of things like user signups. Marks the first ever international face-to-face meeting of townies. exciting!
+                </li>
+                <li>
+                  <a href="/guestbook">guestbook</a> went live! (<em>lol</em>)
+                </li>
+                <li>
+                  you can now click on the pretty ascii tilde.town over to the
+                  left to visit a random page (or just go directly
+                  to <a href="/cgi/random">/cgi/random</a>).
+                </li>
+              </ul>
+              as always, tilde.town is a place for html and feels. feels run
+              strong and well today. come say hi!
+            </p>
+            <p><sub><em>Sun Jul 26 18:01:58 PDT 2015</em></sub></p>
+            <h4>new homepage design</h4>
+            <p><sub><em>Sun Jul 26 18:01:58 PDT 2015</em></sub></p>
+            <p>
+              <a href="/~vilmibm">~vilmibm</a> made a cleaned up homepage. it's linking to two under construction feature--a new help desk for admin requests and a random page linker. there is also a new <a href="/~wiki/faq.html">FAQ</a>. 
+            </p>
+            <p>
+              we've also hit a cool donation milestone of $60. thank you
+              everyone who has donated! our monthly costs are now covered and if
+              we hit $65 we can do some more server enhancements.
+            </p>
+
+            <h4>donations! also, new disk</h4>
+            <p><sub><em>Wed Apr 29 06:04:58 UTC 2015</em></sub></p> <p>An exciting day for
+              tilde.town. We now have way to donate via <a
+                                                           href="https://www.patreon.com/nathanielksmith">patreon</a>. Thanks to all the
+              folx who have already become patrons! y'all make the heart of this sysadmin
+              warm and fuzz. A big part of the push for donations was a need for more server
+              space which we have as of tonight's server upgrade/reboot. The main tilde.town
+              server now has a 40gb disk. Enjoy!</p>
+            
+            <p>Some updates coming down the pipe:
+              <ul>
+                <li>2gb quota for all users</li>
+                <li>fixed poetry server</li>
+                <li>better signup process/docs</li>
+              </ul>
+            </p>
+            
+            <h4>welcome haiku</h4>
+            <p><sub><em> Thu Mar  5 21:19:42 UTC 2015</em></sub></p>
+            <p>If you signed up in the last two months or so you had a bum welcome present
+              in your /home. the script has been fixed and now everyone retroactively has a
+              welcome haiku in their home directory. enjoy.</p>
+            
+            <h4>server restart</h4>
+            <p><sub><em>Tue Jan 27 21:13:27 UTC 2015</em></sub></p>
+            <p>Hi. Today tilde.town had to restart to pick up a patch for <a
+                                                                             href="http://seclists.org/oss-sec/2015/q1/276">CVE 2015-0235</a>.
+              data.tilde.town (our poetry server) has also been patched and restated. Sorry
+              for any inconvenience!</p>
+            
+            <h4>lots of people</h4>
+            <p><sub><em>Thu Jan  1 07:37:16 UTC 2015</em></sub></p>
+            <p>we have ~370 users. isn't that wild?</p>
+            
+            <h4>Scheduled Downtime Tonight</h4>
+            <p><sub><em>Wed Nov 26 21:19:12 UTC 2014</em></sub></p>
+            
+            <p>To accommodate our growing user base, there will be a server resize/reboot
+              tonight (Pacific time). Sadly I cannot give an exact time as I still don't have
+              internet at my new place and will have to opportunistically find some to
+              execute this upgrade.</p>
+            <p>The server should only be down for a few minutes, but this will terminate
+              any running applications (like tmux/screen/irssi). Any files open in an editor
+              should be preserved by a swap file but you still may want to save and close
+              things in the next several hours.</p>
+            <p>Also, this upgrade means that tilde.town is no longer an essentially free
+              project, so I may put up something for donations soon.</p>
+            
+            <h4>100+ users party report</h4>
+            <p><sub><em>Sun Nov  9 23:07:08 UTC 2014</em></sub></em>
+<p>tilde.town now has 102 users. We crossed into three digits last night and
+  lots of townies hung out in irc to celebrate. Some new features even
+  launched!</p>
+
+<ul>
+  <li>the homepage userlist is now sorted by modified time</li>
+  <li>there is now a shared <pre>tweet</pre> command that all users can use to tweet to the <a href="http://twitter.com/tildetown">@tildetown</a> account (protip: <pre>haiku | tweet</pre>)</li>
+  <li>run <pre>random_pokemon.sh</pre> to get a random ascii art pokemon (thanks, <a href="http://tilde.town/~sanqui">~sanqui</a>)</li>
+  <li>an insane <a href="http://tilde.town/~wiki">git-based wiki</a> that all townies can edit (thanks for the help, <a href="http://tilde.town/~datagrok">~datagrok</a>)</li>
+  <li>an IRC bot (thanks, <a href="http://tilde.town/~selfsame">~selfsame</a>) that plays numberwang</li>
+  <li>even moar learnings up on the page of <a href="http://tilde.town/~shanx">~shanx</a></li>
+  <li>general good feels</li>
+</ul>
+
+<h4>80 users!</h4>
+<p><sub><em>Wed Oct 29 18:19:45 UTC 2014</em></sub></em>
+
+<p>tilde.town just added its 80th user. Welcome! Some folks have been having
+  trouble with ssh public keys. Remember, public keys are really confusing if you
+  aren't too familiar with them, and there is no judgement if you can't
+  immediately get them to work. Feel free to tweet at <a
+                                                         href="https://twitter.com/tildetown">@tildetown</a> or send an email to <a
+                                                                                                                                    href="mailto:nks@lambdaphil.es">~vilmibm</a> if you'd like some help.</p>
+
+</p>
+
+<h4>60 users</h4>
+<p><sub><em>Sat Oct 25 19:37:47 UTC 2014</em></sub></em>
+<p>tilde.town is up to 60 users. This is lovely! It is also only a tenth of our
+  planned total user capacity, so if you are interested in a tilde* account we'd
+  love to have you. You can even submit a user request with a fancy form now!</p>
+
+<p>
+  <strong><a href="http://goo.gl/forms/8IvQFTDjlo">submit a user account request!</a></strong>
+</p>
+</p>
+
+<h4>Change of IP, warnings when you ssh</h4>
+<p><sub><em>Sun Oct 19 03:28:59 UTC 2014</em></sub></p>
+<p>
+  In the interest of making sure we don't suddenly disappear from the Internet
+  as a result of a dynamic IP change on AWS I switched to using an Elastic
+  IP (amusingly, "elastic" IPs are static).
+</p>
+
+<p>
+  The upside is that we now have a static IP (also it's free) (woo).
+</p>
+
+<p>
+  The downside is that when you try to SSH into tilde.town, now, you'll get an
+  error about "something nasty" and there will be many @ characters. You'll want
+  to edit your .ssh/known_hosts file and remove the entry for tilde.town (your
+  error message should have a cute copy-pasta-able one-liner for doing this for
+  you).
+</p>
+
+<p>
+  Go ahead and do that, and then log in With Confidence. Hopefully this won't happen again.
+</p>
+
+<p>
+  I'll close by mentioning the imminent arrival of many new tildeverse members. We (the tildeverse operators) are just about ready to accept the signups currently languishing in a waitlist. This means lots of new users, which is lovely, but may mean some growing pains while I adapt our server to the new user load in the most cost-effective way.
+</p>
+          </td>
+        </tr>
+      </table>
+      
+      <!--
+        <h1>tilde.town is a small unix server built for sharing</h1>
+<table>
+<tr>
+  <td style="width:25%">
+<h2>users</h2>
+our esteemed users ({{num_users}})<br> 
+<sub>generated at {{generated_at}}</sub><br>
+
+<ul>
+  {{#users}}
+  <li>
+    <a href="http://tilde.town/~{{username}}">{{username}}</a>
+    {{#default}}(default :3){{/default}}
+  </li>
+  {{/users}}
+</ul>
+</td>
+  <td valign="top">
+  <h2>what is the tilde.town?</h2>
+  <p>tilde.town is an intentional community focused on <b>radical inclusivity</b> and the <b>creation of digital art</b>. We strive to create a place that is open to people of all backgrounds and technical ability and strive together to make beautiful works of art that can be conveyed via the web.</p>
+ <h2>how do i join tilde.town?</h2>
+  <p>sign up with this fancy form, here! it takes a few days since there is
+just one person managing the signups and each user must be manually added.
+Please read our <a href="http://tilde.town/~wiki/conduct.html">code of
+conduct</a> and only sign up if you agree to be bound by it.</p>
+<h3><a href="http://goo.gl/forms/8IvQFTDjlo">sign up form</a></h3>
+  <h2>what isn't tilde.town?</h2>
+  <p>it's never super fun to define stuff in a negative sense, but there has been a lot of confusion around what tilde.town is and isn't. tilde.town is <i>not</i> a startup. it is <i>not</i> commercial in any way. tilde.town, as a side effect, has features of a social network but it is not intended to be the "next" anything (except maybe geocities or angelfire). tilde.town is <b>not</b> <a href="http://tilde.club">tilde.club</a> but is inspired by it.</p>
+ <h2>who is tilde.town?</h2>
+<p>tilde.town is made up of its members. we are a group of creative folk
+interested in peer education and digital art. the founder is <a
+href="http://tilde.town/~vilmibm">~vilmibm</a> whom you are more than welcome to
+talk at via <a href="https://twitter.com/nate_smith">twitter</a> or <a
+href="mailto:nathanielksmith@gmail.com">email</a>.</p>
+ <h2>why tilde.town?</h2>
+<p>making websites is harder than ever; everything that
+can be commercialized is being commercialized; knowledge is being carved up and
+locked away for profit; software is increasingly proprietary and bloated.
+tilde.town is an experiment in reclaiming a bygone era of low-barrier,
+judgement-free, low stakes expression with a focus on low-tech art and
+pseudonymous creation.</p>
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<td>
+</td>
+<td>
 </td>
 
 </tr>
 </table>
   
+-->
     </body>
 </html>
