@@ -50,7 +50,6 @@ Usage: stats.py > /var/www/html/tilde.json
 """
 
 import datetime
-import hashlib
 import json
 import os
 import pwd
