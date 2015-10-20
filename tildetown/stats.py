@@ -1,6 +1,6 @@
 #!/usr/local/bin/python3
 
-# tdp.py - tilde data in tilde data protocol format.
+# stats.py - tilde data in tilde data protocol format.
 # Copyright 2015 Michael F. Lamb <http://datagrok.org>
 # License: GPLv3+
 
@@ -14,11 +14,10 @@ It is a JSON structure of the form:
     'name':         (string) the name of the server.
     'url':          (string) the URL of the server.
     'signup_url':   (string) the URL of a page describing the process required to request an account on the server.
-    'user_count':   (number) the number of users currently registered on the server.
     'want_users':   (boolean) whether the server is currently accepting new user requests.
     'admin_email':  (string) the email address of the primary server administrator.
     'description':  (string) a free-form description for the server.
-    'users': [      (array) an array of users on the server.
+    'users': [      (array) an array of users on the server, sorted by last activity time
         {
             'username': (string) the username of the user.
             'title':    (string) the HTML title of the user’s index.html page.
@@ -26,30 +25,24 @@ It is a JSON structure of the form:
             },
         ...
         ]
+    'user_count':   (number) the number of users currently registered on the server.
     }
 
-We also overload this with the preexisting data format we were using in
-/var/local/tildetown/tildetown-py/stats.py, which is of the form:
+We also overload this with some data we were using in the previous version of
+stats.py, which is of the form:
 
 {
-    'all_users': [ (array) of users on the server.
+    'users': [ (array) of users on the server.
         {
-            'username': (string) the username of the user.
             'default': (boolean) Is the user still using their unmodified default index.html?
             'favicon': (string) a url to an image representing the user
             },
         ...
         ]
-    'num_users': (number) count of all_users
-    'live_users': [ (array) an array of live users, same format as all_users. Users may appear in both arrays.
-        ...
-        ],
-    'num_live_users': (number) count of live users
+    'live_user_count': (number) count of live users (those who have changed their index.html)
     'active_user_count': (number) count of currently logged in users
     'generated_at': (string) the time this JSON was generated in '%Y-%m-%d %H:%M:%S' format.
     'generated_at_msec': (number) the time this JSON was generated, in milliseconds since the epoch.
-    'site_name': (same as 'name' above)
-    'site_url': (same as 'url' above)
     'uptime': (string) output of `uptime -p`
 
 }
@@ -148,7 +141,10 @@ def tdp_user(username, homedir):
 
 def tdp():
     now = datetime.datetime.now()
-    users = [tdp_user(u, h) for u, h in get_users()]
+    users = sorted(
+        (tdp_user(u, h) for u, h in get_users()),
+        key=lambda x:x['mtime'],
+        reverse=True)
 
     # TDP format data
     data = {
