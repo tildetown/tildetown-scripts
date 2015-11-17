@@ -1,8 +1,6 @@
-#!/bin/bash
-
-cd /var/local
-
-source venvs/tildetown/bin/activate
-output=$(python tildetown/tildetown-py/stats.py)
-deactivate
-echo $output
+#!/bin/sh
+# run stats.py in the appropriate virtualenv.
+#
+# invoke periodically from crontab and direct the output to
+# /var/www/tilde.town/tilde.json
+exec /usr/local/virtualenvs/tildetown/bin/python /usr/local/tildetown-scripts/tildetown/stats.py
