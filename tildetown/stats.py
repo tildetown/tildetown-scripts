@@ -134,34 +134,27 @@ def parse_news(news_path):
     metadata_keys = ['title', 'pubdate']
     in_meta = True
     in_content = False
-    current_entry = {}
+    current_entry = {'content':''}
     entries = []
     with open(news_path, 'r') as f:
-        line = f.readline().rstrip().lstrip()
+        line = 'not null'
         while line:
+            line = f.readline()
             if blank_line_re.match(line) or line.startswith('#'):
-                line = f.readline().rstrip().lstrip()
                 continue
-
-            if in_meta:
+            elif line == '--\n':
+                entries.append(current_entry)
+                current_entry = {'content':''}
+                in_meta = True
+                in_content = False
+            elif in_meta:
                 key, value = line.split(':', 1)
-                current_entry[key] = value
+                current_entry[key] = value.rstrip().lstrip()
                 if set(current_entry.keys()) == set(metadata_keys):
                     in_content = True
                     in_meta = False
-
-            if in_content:
-                if 'content' not in current_entry:
-                    current_entry['content'] = ''
-                current_entry['content'] += "\n{}".format(line)
-
-            if line == '--\n':
-                entries.append(current_entry)
-                current_entry = {}
-                in_meta = True
-                in_content = False
-
-            line = f.readline().rstrip().lstrip()
+            elif in_content:
+                current_entry['content'] += "\n{}".format(line.lstrip().rstrip())
 
     return entries
 
