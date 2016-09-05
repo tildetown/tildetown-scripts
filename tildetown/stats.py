@@ -136,7 +136,7 @@ def tdp():
     # TDP format data
     data = {
         'name': 'tilde.town',
-        'url': 'http://tilde.town',
+        'url': 'https://tilde.town',
         'signup_url': 'http://goo.gl/forms/8IvQFTDjlo',
         'want_users': True,
         'admin_email': 'nks@lambdaphil.es',

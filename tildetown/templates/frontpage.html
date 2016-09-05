@@ -47,15 +47,15 @@
 
             <h3>stuff you can do here</h3>
             <ul>
-              <li>geocities style hosting</li>
+              <li>static html hosting</li>
               <li>internal irc network</li>
-              <li>private usenet constellation</li>
               <li>internal mail</li>
               <li>command line / unix tutelage</li>
+              <li>generate random poetry (with <a href="https://github.com/nathanielksmith/prosaic">prosaic</a>)</li>
               <li>make ascii art</li>
               <li>host twitter bots</li>
               <li>participate in our <a href="https://twitter.com/tildetown">communal twitter</a></li>
-              <li>generate random poetry <em>(under construction)</em></li>
+              <li>private usenet constellation (temporarily disabled)</li>
             </ul>
 
             <a style="text-decoration:none" href="/cgi/random">
@@ -197,6 +197,77 @@ orators, singers, musicians to come!
           </td>
           <td valign="top" width="40%">
             <h3>news</h3>
+
+            <h4>recent outage</h4>
+            <p><sub><em>Thu Aug 11 17:58:00 UTC 2016</em></sub></p>
+            <p>
+            There was recently an issue with AWS that blocked off HTTP, UDP,
+            and outbound traffic from the town. The outage lasted about 24
+            hours and is now resolved.
+            </p>
+
+            <h4>tilde.town in the washington post</h4>
+            <p><sub><em>Mon May  9 21:36:08 UTC 2016</em></sub></p>
+            <p>
+            Our entry on <a href="http://brutalistwebsites.com/tilde.town/">brutalist websites</a> was mentioned on a
+            <a href="https://www.washingtonpost.com/news/the-intersect/wp/2016/05/09/the-hottest-trend-in-web-design-is-intentionally-ugly-unusable-sites/">
+            Washington Post blog</a>. Apparently, tilde.town is
+            both ugly and hard to use ^_^ Let ~vilmibm know if this is the
+            case...
+            </p>
+            <h4>https support</h4>
+            <p><sub><em>Mon Mar 28 06:25:27 UTC 2016</em></sub></p>
+            <p>
+            Thanks to the gracious help of user
+            <a href="/~demophoon">~demophoon</a>
+            the town is now accessible over https! just hit up
+            <a href="https://tilde.town">https://tilde.town</a>
+            in ye olde browsere to check it out.
+            </p>
+            <h4>irc client fixed for all users</h4>
+            <p><sub><em>Tue Feb 23 16:31:58 PST 2016</em></sub></p>
+            <p>
+                the <code>irc</code> and <code>chat</code> commands are now
+                fixed for all users. in the course of this fix i accidentally
+                deleted everyone's weechat config. if you had a bunch of stuff
+                in your weechat config that you really want back let me know and
+                i can check the backups.
+            </p>
+
+            <h4>irc client outage</h4>
+            <p><sub><em>Fri Feb 19 13:39:25 PST 2016</em></sub></p>
+
+            <p>
+                because of Reasons, the <code>irc</code> and <code>chat</code> scripts are broken. you can still use irc, you just have to run the following:
+                <pre>
+irc
+/set irc.look.temporary_servers on
+/quit
+irc
+                </pre>
+
+                and you should be good to go until this is fixed.
+            </p>
+
+            <h4>Restart today</h4>
+            <p><sub><em>Fri Feb 19 12:07:09 PST 2016</em></sub></p>
+
+            <p>
+                Thanks to <a
+                href="https://googleonlinesecurity.blogspot.com/2016/02/cve-2015-7547-glibc-getaddrinfo-stack.html">this
+                glibc vulnerability</a> the town needs to restart to install
+                security updates.
+            </p>
+            <p>
+                remember your tilde.town apocalypse training:
+                <ul>
+                    <li>ssh (or mosh) back in to restore your tmux (or screen) session / rejoin irc</li>
+                    <li>restart any bots / MUDs / services you don't have set up via cron</li>
+                    <li>stare not over long into the abyss lest it stares back into you</li>
+                    <li>observe all posted signage for proper apocalypse evacuation strats</li>
+                    <li>hug a tree, out your crushes</li>
+                </ul>
+            </p>
 
             <h4>Systems status</h4>
             <p><sub><em>Wed Oct 14 13:49:12 PDT 2015</em></sub></p>

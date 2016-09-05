@@ -28,6 +28,20 @@ SITE_NAME = 'tilde.town'
 
 app = Flask('~cgi')
 
+app.config['DEBUG'] = True
+# tension between this and cfg function...
+
+conf = ConfigFactory.parse_file('cfg.conf')
+
+#logfile = conf.get('logfile', '/tmp/cgi.log')
+#logging.basicConfig(filename=logfile, level=logging.DEBUG)
+logging.basicConfig(filename='/tmp/cgi.log', level=logging.DEBUG)
+
+app.config['DATA_DIR'] = conf['guestbook_dir']
+app.config['TRELLO_EMAIL'] = conf['trello_email']
+app.config['MAILGUN_URL'] = conf['mailgun_url']
+app.config['MAILGUN_KEY'] = conf['mailgun_key']
+
 @lru_cache(maxsize=32)
 def site_context():
     return get_data()
@@ -56,6 +70,7 @@ def get_random():
 
 @app.route('/guestbook', methods=['GET'])
 def get_guestbook():
+    logging.debug(app.config)
     logging.debug('loading guestbook')
     data_dir = app.config['DATA_DIR']
     # TODO sort by timestamp
@@ -121,20 +136,4 @@ def post_helpdesk():
     return redirect('/helpdesk?status={}&desc={}'.format(status, desc))
 
 if __name__ == '__main__':
-    app.config['DEBUG'] = True
-    # tension between this and cfg function...
-
-    conf = ConfigFactory.parse_file('cfg.conf')
-
-    logfile = conf.get('logfile', '/tmp/cgi.log')
-    logging.basicConfig(filename=logfile, level=logging.DEBUG)
-
-    app.config['DATA_DIR'] = conf['guestbook_dir']
-    app.config['TRELLO_EMAIL'] = conf['trello_email']
-    app.config['MAILGUN_URL'] = conf['mailgun_url']
-    app.config['MAILGUN_KEY'] = conf['mailgun_key']
-
-    logging.debug("Running with data_dir=", app.config['DATA_DIR'])
-    logging.debug(app.config)
-
     app.run()
