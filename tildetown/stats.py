@@ -150,7 +150,7 @@ def parse_news(news_path):
             elif in_meta:
                 key, value = line.split(':', 1)
                 current_entry[key] = value.rstrip().lstrip()
-                if set(current_entry.keys()) == set(metadata_keys):
+                if set(metadata_keys).issubset(current_entry.keys()):
                     in_content = True
                     in_meta = False
             elif in_content:
