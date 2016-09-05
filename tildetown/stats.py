@@ -44,6 +44,7 @@ stats.py, which is of the form:
     'generated_at': (string) the time this JSON was generated in '%Y-%m-%d %H:%M:%S' format.
     'generated_at_msec': (number) the time this JSON was generated, in milliseconds since the epoch.
     'uptime': (string) output of `uptime -p`
+    'news': collection of tilde.town news entries containing 'title', 'pubdate', and 'content', the latter being raw HTML
 
 }
 Usage: stats.py > /var/www/html/tilde.json
@@ -58,6 +59,8 @@ import subprocess
 
 SYSTEM_USERS = ['wiki', 'root', 'ubuntu', 'nate', 'nobody']
 DEFAULT_HTML_FILENAME = "/etc/skel/public_html/index.html"
+NEWS_PATH = '/home/vilmibm/news.posts'
+blank_line_re = re.compile(r'\s*\n')
 title_re = re.compile(r'<title[^>]*>(.*)</title>', re.DOTALL)
 
 def active_user_count():
@@ -126,6 +129,42 @@ def tdp_user(username, homedir):
             'default': False
             }
 
+def parse_news(news_path):
+    """Given a path to a .posts file, builds an returns a list of news entries with keys 'title', 'content', and 'pubdate'"""
+    metadata_keys = ['title', 'pubdate']
+    in_meta = True
+    in_content = False
+    current_entry = {}
+    entries = []
+    with open(news_path, 'r') as f:
+        line = f.readline().rstrip().lstrip()
+        while line:
+            if blank_line_re.match(line) or line.startswith('#'):
+                line = f.readline().rstrip().lstrip()
+                continue
+
+            if in_meta:
+                key, value = line.split(':', 1)
+                current_entry[key] = value
+                if set(current_entry.keys()) == set(metadata_keys):
+                    in_content = True
+                    in_meta = False
+
+            if in_content:
+                if 'content' not in current_entry:
+                    current_entry['content'] = ''
+                current_entry['content'] += "\n{}".format(line)
+
+            if line == '--\n':
+                entries.append(current_entry)
+                current_entry = {}
+                in_meta = True
+                in_content = False
+
+            line = f.readline().rstrip().lstrip()
+
+    return entries
+
 def tdp():
     now = datetime.datetime.now()
     users = sorted(
@@ -139,7 +178,7 @@ def tdp():
         'url': 'https://tilde.town',
         'signup_url': 'http://goo.gl/forms/8IvQFTDjlo',
         'want_users': True,
-        'admin_email': 'nks@lambdaphil.es',
+        'admin_email': 'nathanielksmith@gmail.com',
         'description': " ".join(l.strip() for l in """
             an intentional digital community for creating and sharing works of
             art, educating peers, and technological anachronism. we are a
@@ -158,6 +197,7 @@ def tdp():
         'generated_at_msec': int(now.timestamp() * 1000),
         'uptime': subprocess.check_output(['uptime', '-p'], universal_newlines=True),
         'live_user_count': sum(1 for x in data['users'] if not x['default']),
+        'news': parse_news(NEWS_PATH),
         })
 
     return data
