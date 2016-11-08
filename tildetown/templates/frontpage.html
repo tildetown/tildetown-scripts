@@ -1,13 +1,77 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>welcome to tilde town!</title>
-<meta charset="utf-8">
-        <link rel="stylesheet" href="style.css" />
-        <link rel="icon" href="/favicon.ico" />
-    </head>
-    <body>
-      <h1 style="text-align:center">tilde.town</h1>
-      <h3 style="text-align:center"><em>is a small unix server made for sharing</em></h3>
+  <head>
+    <title>tilde.town</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico" />
+    <style>
+      body {
+        background-color: #E0B0FF;
+      }
+      ul {
+      list-style: none;
+      padding: 8px 0 0 0;
+      margin: 0;
+      }
+
+      li {
+      padding-left: 16px;
+      }
+
+      li:before {
+      content: "~";
+      padding-right: 2px;
+      cursor: default;
+      }
+      #title {
+        text-align:center;
+      }
+      #intro {
+        background-color: rgba(0,0,0,0.1);
+      
+      }
+      .leftcol {
+        float: left;
+        margin-left: 10%;
+        width: 40%;
+      }
+      .rightcol {
+        float: right;
+        margin-right:10%;
+        width: 40%;
+      }
+      #logo pre {
+        font-size: 150%;
+      }
+      #about {
+        padding: 1em;
+      }
+      #dynamic div {
+        padding-bottom: 2em;
+      }
+      #footer {
+        padding: 1em;
+        text-align:center;
+        background-color: rgba(0,0,0,0.1);
+        clear:both;
+
+      }
+      @media (max-width: 1200px) { #logo pre {font-size: 125%;} }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <div id="title">
+        <!-- no idea why but i had to move the _ way over -->
+        <pre>
+               _                                            
+    o  | |    |                               
+_|_    | |  __|   _  _|_  __           _  _   
+ |  |  |/  /  |  |/   |  /  \_|  |  |_/ |/ |  
+ |_/|_/|__/\_/|_/|__/o|_/\__/  \/ \/    |  |_/
+          </pre>
+      </div>
+      <div id="links">
       <p style="text-align:center">
         <a href="/~wiki/faq.html">faq</a>
         | <a href="/guestbook">sign our guestbook</a>
@@ -18,435 +82,126 @@
         | <a href="/~wiki">wiki</a>
       </p>
 <marquee behavior="alternate"><strong>~*~*~* {{active_user_count}} townies active right now *~*~*~</strong></marquee>
-      <table width="100%">
+      </div>
+    </div>
+    <div id="intro">
+      <table>
         <tr>
-          <td valign="top" width="20%">
-            <h3>our esteemed users </h3>
-            <sub>({{live_user_count}} / {{user_count}} shown)</sub><br>
-            <sub>generated at {{generated_at}}</sub><br>
-            <sub>sorted by recent changes</sub><br>
-
-            <ul>
-              {{#users}}
-                {{^default}}
-                  <li>
-                    <a href="/~{{username}}">{{username}}</a>
-                  </li>
-                {{/default}}
-              {{/users}}
-            </ul>
-            <a href="/users.html">full user list</a>
+          <td>
+      <div id="logo" class="">
+        <a style="text-decoration:none" href="/cgi/random">
+        <pre title="go to a random page">
+/^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\
+< |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| >
+< |      (  )        . '      t i l d e . t o w n | >
+< |                 .                             | >
+< |  __            :                              | >
+< | / /\ __    ___!__    _,__       ___,_         | >
+< |/ / o\/ \  /      /\ /__/ \     /__\__\  . .  .| >
+< | /   \\  \/_____ /_*\  |  |[^][^|  |  |[^]())[^| >
+< |/  /\    |      |    |_|__|  .: |__|__|  ()(/) | >
+< |   ||    |  {^} |    |                  ( ~)()o| >
+< | []  []  |   |  |    |. .   A  ._  .  .( O((/~)| >
+< |  _  _   |___|__|__D_|    . H  / \  {^} ()||)  | >
+< | | |[@]  |   |    .  .  .  | |/   \  |   \|| __| >
+< |_|_|_____|         .  .    |^|     \ | v  ||/vv| >
+< |      . .   v   v  .       | |      \|.  v /vvv| >
+< |           .  v  v .      / O \    /|   . /vvvv| >
+< |  |_ u _|     .  .       /  _  \  / |    .|    | >
+< |  || | ||               /  |_|  \/  |     |    | >
+< |                        |       |   |.    |    | >
+<3|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| >
+\vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv/
+        </pre>
+        </a>
+      </div>
           </td>
-          <td valign="top" width="40%">
-            <p>this site is an intentional digital community for creating and
-            sharing works of art, educating peers, and technological
-            anachronism. we are a completely
-            non-commercial, <a href="https://www.patreon.com/nathanielksmith?ty=h">donation supported</a>, and
-            committed to rejecting false technological progress in favor of
-            empathy and sustainable computing.</p>
-
-            <h3>stuff you can do here</h3>
-            <ul>
-              <li>static html hosting</li>
-              <li>internal irc network</li>
-              <li>internal mail</li>
-              <li>command line / unix tutelage</li>
-              <li>generate random poetry (with <a href="https://github.com/nathanielksmith/prosaic">prosaic</a>)</li>
-              <li>make ascii art</li>
-              <li>host twitter bots</li>
-              <li>participate in our <a href="https://twitter.com/tildetown">communal twitter</a></li>
-              <li>private usenet constellation (temporarily disabled)</li>
-            </ul>
-
-            <a style="text-decoration:none" href="/cgi/random">
-            <pre title="go to a random page">
-
- |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
- |                         !                        /\    |  X  |
- |                         !                       //\\   | / \ |
- |      @@@                ! |~~~~~~~~~~~~~|      ///\\\  |/   \|
- |     @@@@@              /i\|=============|     ////\\\\ |\   /|
- |      @@@              /(i)\====== == ===|    /////\\\\\| \ / |
- |                      /((i))\============|   //////\\\\\\  X  |
- |                      |% % %|=== ===== ==|   I||||||||||I / \ |
- |                      |% % %|====== =====|   I||||||||||I/   \|
- |:::                   |% # %|============|   I||||||||||I\   /|
- |:::                   |% % %|= ====== ===|   I||||||||||I \ / |
- |:::                   |% % #|==== ==+++++++++++++|||||||I  X  |
- |:::HHHHHHHHHHHH       |% % %|=======! ! ! ! ! ! !|||||||I / \ |
- |:::HHHHHH HHHHH       |% # %|= =====! ! ! ! ! ! !|||||||I/   \|
- |:::HHHHHHHHHHHH       |# % %|=== ===! ! ! ! ! ! !|||||||I\   /|
- |:::HHH HHHHHHHH       |% % %|=======! ! ! ! ! ! !|||||||I \ / |
- |:::HHHHHHTTTTTTTTTTTTTTT % #|== = ==! ! ! ! ! ! !|||||||I  X  |
- |:::HHHHHHI [] [] [] [] I # #|=======! ! ! ! ! ! !|||||||I / \ |
- |::: HHHHHI [] [] [] [] I % %|====  =! ! ! ! ! ! !|||||||I/   \|
- |:::HHHH HI [] [] [] [] I # %|== ====! ! ! ! ! ! !|||||||I\   /|
- |:::HHHHHHI [] [] [] [] I % %|=======! ! ! ! ! ! !|||||||I \ / |
- |:::HHHHHHI [] [] [] [] I % #|=== = =! ! ! ! ! ! !|||||||I  X  |
- |:::HH HHHI [] [] [] [] I % #| ======! ! ! ! ! ! !|||||||I / \ |
- |:::HHHHHHI [] [] [] [] I # #|= = ===! ! ! ! ! ! !|||||||I/   \|
- |:::HHHHH I [] [] [] [] I % %|==== ==! ! ! ! ! ! !|||||||I\   /|
- |:::HHHHHHI [] [] [] [] I % #|=======! ! ! ! ! ! !|||||||I \ / |
- |:::HHHHHHI [] [] [] [] I # #|= =====! ! ! ! ! ! !|||||||I  X  |
- |:::H HHHHI [] [] [] [] I # #|=== = =! ! ! ! ! ! !|||||||I / \ |
- |:::HHHHHHI [] [] [] [] I # #|=======! ! ! ! ! ! !|||||||I/   \|
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              
-    o  | |    |                               
-_|_    | |  __|   _  _|_  __           _  _   
- |  |  |/  /  |  |/   |  /  \_|  |  |_/ |/ |  
- |_/|_/|__/\_/|_/|__/o|_/\__/  \/ \/    |  |_/
-              </pre>
-            </a>
-            <hr>
-<pre>
-orators, singers, musicians to come!
- She will break it to you better than I can.
- Saturn expelled his father, and seized his throne
--- I wish our opinions were the same.
- Ere departing fade from my eyes your forests of bayonets
- Emma soon recollected, and understood him
-
---'''' My dear papa, he is three-and-twenty.
- I hope time has not made you less willing to pardon.
-; Nay-be calm, for I am so: Does it burn?
- She will break it to you better than I can.
- play the part that looks back on the actor or actress!
- She continued to look back, but in vain
-
- It is necessary and beside the large sort is puff.
-; she is living in dread of the visit.
- Year of comets and meteors transient and strange
-;'' remember that I am here.-- Mr.
- She will break it to you better than I can.
-; and Emma was quite in charity with him.
-
- It is a mere nothing after all
- The doors of the two rooms were just opposite each other.
- She will break it to you better than I can.
- I shall just go round by Mrs. Cole 's
- Here is realization, Here is a man tallied
- Even pleasure, you know, is fatiguing
-
- Keep your raptures for Harriet 's face.
- Ere departing fade from my eyes your forests of bayonets
- For to one side she leans, Then back she sways
- It soon appeared that London was not the place for her.
- Perhaps they had the figure of a winged horse on the prow
- She will break it to you better than I can.
-
- She will break it to you better than I can.
- To conclude, I announce what comes after me.
-; nothing delineated or distinguished.
- Excelsior Who has gone farthest?
- To girlhood, boyhood look, the teacher and the school.
-`` How I could so long a time be fancying myself!
-
-`` Yes, sometimes he can.'' Do you mean with regard to this letter?''
- Any nonsense will serve. the flesh over and over!
- Eleves, I salute you!`` I not aware!'
-</pre>
-<hr>
-        <pre>
- Have you guess 'd you yourself would not continue?
- The wanderer would not heed me
-`` He told me at parting, that he should soon write
- Mr. Elton looked all happiness at this proposition
- what is it to us what the rest do or think?
- I doubted it more the next day on Box Hill
-
- Come thou, arise from the ground unto the place yonder
- One was the son of Mars, and was killed before Troy
- He had done his duty and could return to his son.
- I never saw any thing so outree!
-; woods, together with mountains, are on fire.
-`` He told me at parting, that he should soon write
-
-`` He told me at parting, that he should soon write
-; and, abhorring the light, they fly { abroad} by night.
- Can not you guess what this parcel holds?''
- And these things I see suddenly, what mean they?
- And you, paid to defile the People
- Very strongly may be sincerely fainting.
-
- she cried with a most open eagerness
-`` He told me at parting, that he should soon write
- Let me hear from you without delay
- By him she was put in mind of what she might do
-; but Emma 's countenance was as steady as her words.
- Dear Miss Woodhouse, do advise me.''
-
- It was certainly ‘barbara’ in the eyes of a Greek
- One can not creep upon a journey
- One was the son of Mars, and was killed before Troy
-`` He told me at parting, that he should soon write
-[ 77 and struck the guilty{ draught} from his mouth.
-; The golden sun of June declines, It has not caught her eye.
-
- Clarke translates ‘miseri senis ore,
-: naught there is Save body, having property of touch.
- Alas poor boy, he will never be better,
-; but if he wished to do it, it might be done.
-`` He told me at parting, that he should soon write
- One was the son of Mars, and was killed before Troy
-
- I knew who it came from. The virgin shrieks aloud
- To feel the presence of a brave commanding officer But she was always right.
- I 'd rather you would.'' This was a river of Troy
-</pre>
-          </td>
-          <td valign="top" width="40%">
-            <h3>news</h3>
-
-            <h4>recent outage</h4>
-            <p><sub><em>Thu Aug 11 17:58:00 UTC 2016</em></sub></p>
-            <p>
-            There was recently an issue with AWS that blocked off HTTP, UDP,
-            and outbound traffic from the town. The outage lasted about 24
-            hours and is now resolved.
-            </p>
-
-            <h4>tilde.town in the washington post</h4>
-            <p><sub><em>Mon May  9 21:36:08 UTC 2016</em></sub></p>
-            <p>
-            Our entry on <a href="http://brutalistwebsites.com/tilde.town/">brutalist websites</a> was mentioned on a
-            <a href="https://www.washingtonpost.com/news/the-intersect/wp/2016/05/09/the-hottest-trend-in-web-design-is-intentionally-ugly-unusable-sites/">
-            Washington Post blog</a>. Apparently, tilde.town is
-            both ugly and hard to use ^_^ Let ~vilmibm know if this is the
-            case...
-            </p>
-            <h4>https support</h4>
-            <p><sub><em>Mon Mar 28 06:25:27 UTC 2016</em></sub></p>
-            <p>
-            Thanks to the gracious help of user
-            <a href="/~demophoon">~demophoon</a>
-            the town is now accessible over https! just hit up
-            <a href="https://tilde.town">https://tilde.town</a>
-            in ye olde browsere to check it out.
-            </p>
-            <h4>irc client fixed for all users</h4>
-            <p><sub><em>Tue Feb 23 16:31:58 PST 2016</em></sub></p>
-            <p>
-                the <code>irc</code> and <code>chat</code> commands are now
-                fixed for all users. in the course of this fix i accidentally
-                deleted everyone's weechat config. if you had a bunch of stuff
-                in your weechat config that you really want back let me know and
-                i can check the backups.
-            </p>
-
-            <h4>irc client outage</h4>
-            <p><sub><em>Fri Feb 19 13:39:25 PST 2016</em></sub></p>
-
-            <p>
-                because of Reasons, the <code>irc</code> and <code>chat</code> scripts are broken. you can still use irc, you just have to run the following:
-                <pre>
-irc
-/set irc.look.temporary_servers on
-/quit
-irc
-                </pre>
-
-                and you should be good to go until this is fixed.
-            </p>
-
-            <h4>Restart today</h4>
-            <p><sub><em>Fri Feb 19 12:07:09 PST 2016</em></sub></p>
-
-            <p>
-                Thanks to <a
-                href="https://googleonlinesecurity.blogspot.com/2016/02/cve-2015-7547-glibc-getaddrinfo-stack.html">this
-                glibc vulnerability</a> the town needs to restart to install
-                security updates.
-            </p>
-            <p>
-                remember your tilde.town apocalypse training:
-                <ul>
-                    <li>ssh (or mosh) back in to restore your tmux (or screen) session / rejoin irc</li>
-                    <li>restart any bots / MUDs / services you don't have set up via cron</li>
-                    <li>stare not over long into the abyss lest it stares back into you</li>
-                    <li>observe all posted signage for proper apocalypse evacuation strats</li>
-                    <li>hug a tree, out your crushes</li>
-                </ul>
-            </p>
-
-            <h4>Systems status</h4>
-            <p><sub><em>Wed Oct 14 13:49:12 PDT 2015</em></sub></p>
-            <p>
-                ~vilmibm released a rewrite to the server's infrastructure yesterday. Nothing should be different, but it'll be much easier to work on new features and consume fewer resources.
-            </p>
-            <p>
-                Currently, the <strong>guestbook</strong> is down. Usenet has also been disabled for now since no one was using it and it has a nontrivial impact on the system. If you want to talk about bringing usenet back, bring it up in irc &lt;3.
-            </p>
-
-
-            <h4>BIRTHDAY! The Town Turns 1</h4>
-            <p><sub><em>Sun Oct 11 18:54:35 UTC 2015</em></sub></p>
-            <p>
-            Exactly a year ago, <a href="/~vilmibm">~vilmibm</a> gave himself
-            a birthday present in the form of a small unix server meant for
-            commnunity and sharing. Now, tilde.town is a thriving community of
-            feels, peer education and beautiful digital art.
-            </p>
-            <p>
-            If you are not yet a towner, check out our <a
-            href="http://tilde.town/~wiki/conduct.html">code of conduct</a>,
-          look at some user pages, and <a
-          href="https://docs.google.com/forms/d/1FSv_-gEU9LDy0b5gL8xm23d5QomMHIIstgr_fL5GFmg/viewform?c=0&w=1">sign
-          up!</a>. Everyone is welcome here regardless of skill level and if
-        making SSH keys is a little scary, that's okay. Reach out to <a
-        href="https://twitter.com/tildetown">for help</a>.
-            </p>
-            <p>
-            <strong>Here's to another year of html and feels.</strong>
-            </p>
-
-            <h4>new stuff!</h4>
-            <p><sub><em>Sat Aug  1 17:27:15 PDT 2015</em></sub></p>
-            <p>
-              today was a day of things happening!
-              <ul>
-                <li>the first ever tilde.town volunteer admin meeting happened today. <a href="/~insom">~insom</a>, <a href="/~krowbar">~krowbar</a>, and <a href="/~vilmibm">~vilmibm</a> all met to talk about the future tilde.town and how to ease the burden of things like user signups. Marks the first ever international face-to-face meeting of townies. exciting!
-                </li>
-                <li>
-                  <a href="/guestbook">guestbook</a> went live! (<em>lol</em>)
-                </li>
-                <li>
-                  you can now click on the pretty ascii tilde.town over to the
-                  left to visit a random page (or just go directly
-                  to <a href="/cgi/random">/cgi/random</a>).
-                </li>
-              </ul>
-              as always, tilde.town is a place for html and feels. feels run
-              strong and well today. come say hi!
-            </p>
-            <p><sub><em>Sun Jul 26 18:01:58 PDT 2015</em></sub></p>
-            <h4>new homepage design</h4>
-            <p><sub><em>Sun Jul 26 18:01:58 PDT 2015</em></sub></p>
-            <p>
-              <a href="/~vilmibm">~vilmibm</a> made a cleaned up homepage. it's linking to two under construction feature--a new help desk for admin requests and a random page linker. there is also a new <a href="/~wiki/faq.html">FAQ</a>. 
-            </p>
-            <p>
-              we've also hit a cool donation milestone of $60. thank you
-              everyone who has donated! our monthly costs are now covered and if
-              we hit $65 we can do some more server enhancements.
-            </p>
-
-            <h4>donations! also, new disk</h4>
-            <p><sub><em>Wed Apr 29 06:04:58 UTC 2015</em></sub></p> <p>An exciting day for
-              tilde.town. We now have way to donate via <a
-                                                           href="https://www.patreon.com/nathanielksmith">patreon</a>. Thanks to all the
-              folx who have already become patrons! y'all make the heart of this sysadmin
-              warm and fuzz. A big part of the push for donations was a need for more server
-              space which we have as of tonight's server upgrade/reboot. The main tilde.town
-              server now has a 40gb disk. Enjoy!</p>
-            
-            <p>Some updates coming down the pipe:
-              <ul>
-                <li>2gb quota for all users</li>
-                <li>fixed poetry server</li>
-                <li>better signup process/docs</li>
-              </ul>
-            </p>
-            
-            <h4>welcome haiku</h4>
-            <p><sub><em> Thu Mar  5 21:19:42 UTC 2015</em></sub></p>
-            <p>If you signed up in the last two months or so you had a bum welcome present
-              in your /home. the script has been fixed and now everyone retroactively has a
-              welcome haiku in their home directory. enjoy.</p>
-            
-            <h4>server restart</h4>
-            <p><sub><em>Tue Jan 27 21:13:27 UTC 2015</em></sub></p>
-            <p>Hi. Today tilde.town had to restart to pick up a patch for <a
-                                                                             href="http://seclists.org/oss-sec/2015/q1/276">CVE 2015-0235</a>.
-              data.tilde.town (our poetry server) has also been patched and restated. Sorry
-              for any inconvenience!</p>
-            
-            <h4>lots of people</h4>
-            <p><sub><em>Thu Jan  1 07:37:16 UTC 2015</em></sub></p>
-            <p>we have ~370 users. isn't that wild?</p>
-            
-            <h4>Scheduled Downtime Tonight</h4>
-            <p><sub><em>Wed Nov 26 21:19:12 UTC 2014</em></sub></p>
-            
-            <p>To accommodate our growing user base, there will be a server resize/reboot
-              tonight (Pacific time). Sadly I cannot give an exact time as I still don't have
-              internet at my new place and will have to opportunistically find some to
-              execute this upgrade.</p>
-            <p>The server should only be down for a few minutes, but this will terminate
-              any running applications (like tmux/screen/irssi). Any files open in an editor
-              should be preserved by a swap file but you still may want to save and close
-              things in the next several hours.</p>
-            <p>Also, this upgrade means that tilde.town is no longer an essentially free
-              project, so I may put up something for donations soon.</p>
-            
-            <h4>100+ users party report</h4>
-            <p><sub><em>Sun Nov  9 23:07:08 UTC 2014</em></sub></em>
-<p>tilde.town now has 102 users. We crossed into three digits last night and
-  lots of townies hung out in irc to celebrate. Some new features even
-  launched!</p>
-
-<ul>
-  <li>the homepage userlist is now sorted by modified time</li>
-  <li>there is now a shared <pre>tweet</pre> command that all users can use to tweet to the <a href="http://twitter.com/tildetown">@tildetown</a> account (protip: <pre>haiku | tweet</pre>)</li>
-  <li>run <pre>random_pokemon.sh</pre> to get a random ascii art pokemon (thanks, <a href="http://tilde.town/~sanqui">~sanqui</a>)</li>
-  <li>a <a href="http://tilde.town/~wiki">git-based wiki</a> that all townies can edit (thanks for the help, <a href="http://tilde.town/~datagrok">~datagrok</a>)</li>
-  <li>an IRC bot (thanks, <a href="http://tilde.town/~selfsame">~selfsame</a>) that plays numberwang</li>
-  <li>even moar learnings up on the page of <a href="http://tilde.town/~shanx">~shanx</a></li>
-  <li>general good feels</li>
-</ul>
-
-<h4>80 users!</h4>
-<p><sub><em>Wed Oct 29 18:19:45 UTC 2014</em></sub></em>
-
-<p>tilde.town just added its 80th user. Welcome! Some folks have been having
-  trouble with ssh public keys. Remember, public keys are really confusing if you
-  aren't too familiar with them, and there is no judgement if you can't
-  immediately get them to work. Feel free to tweet at <a
-                                                         href="https://twitter.com/tildetown">@tildetown</a> or send an email to <a
-                                                                                                                                    href="mailto:nks@lambdaphil.es">~vilmibm</a> if you'd like some help.</p>
-
-</p>
-
-<h4>60 users</h4>
-<p><sub><em>Sat Oct 25 19:37:47 UTC 2014</em></sub></em>
-<p>tilde.town is up to 60 users. This is lovely! It is also only a tenth of our
-  planned total user capacity, so if you are interested in a tilde* account we'd
-  love to have you. You can even submit a user request with a fancy form now!</p>
-
-<p>
-  <strong><a href="http://goo.gl/forms/8IvQFTDjlo">submit a user account request!</a></strong>
-</p>
-</p>
-
-<h4>Change of IP, warnings when you ssh</h4>
-<p><sub><em>Sun Oct 19 03:28:59 UTC 2014</em></sub></p>
-<p>
-  In the interest of making sure we don't suddenly disappear from the Internet
-  as a result of a dynamic IP change on AWS I switched to using an Elastic
-  IP (amusingly, "elastic" IPs are static).
-</p>
-
-<p>
-  The upside is that we now have a static IP (also it's free) (woo).
-</p>
-
-<p>
-  The downside is that when you try to SSH into tilde.town, now, you'll get an
-  error about "something nasty" and there will be many @ characters. You'll want
-  to edit your .ssh/known_hosts file and remove the entry for tilde.town (your
-  error message should have a cute copy-pasta-able one-liner for doing this for
-  you).
-</p>
-
-<p>
-  Go ahead and do that, and then log in With Confidence. Hopefully this won't happen again.
-</p>
-
-<p>
-  I'll close by mentioning the imminent arrival of many new tildeverse members. We (the tildeverse operators) are just about ready to accept the signups currently languishing in a waitlist. This means lots of new users, which is lovely, but may mean some growing pains while I adapt our server to the new user load in the most cost-effective way.
-</p>
-          </td>
+          <td>
+      <div id="about" class="">
+        <h1>tilde.town is a computer meant for sharing.</h1>
+        <p>
+          tilde.town is an <strong>intentional digital community</strong>
+          for <strong>making art</strong>, <strong>socializing</strong>,
+          and <strong>learning</strong>. Unlike many online spaces, users
+          interact with tilde.town through a <strong>direct connection</strong>
+          instead of a web site. This means using a tool
+          called <a href="https://en.wikipedia.org/wiki/Secure_Shell">ssh</a>
+          and other text based tools.
+        </p>
+        <p>
+          featured projects:
+          <ul>
+            <li><a href="https://github.com/tildetown/zine/blob/master/issue%201/zine.pdf">a zine!</a></li>
+            <li><a href="https://tilde.town/~joe/">html art</a></li> 
+            <li><a href="https://tilde.town/~kc/blackout/">interactive art</a></li>
+            <li><a href="https://tilde.town/~jumblesale/fp.html">visual art</a></li>
+            <li><a href="https://twitter.com/auto_automata">twitter bots</a></li>
+            <li><a href="http://tilde.town/~elly/userland.txt">peer education</a></li>
+            <li><a href="https://tilde.town/~subtransience/machinecode/aphantom.html">poetry</a></li>
+            <li><a href="https://tilde.town/~karlen/">spoken word</a></li> 
+            <li><a href="http://tilde.town/~fivestarhotel/">music</a></li>
+          </ul>
+        </p>
+        <p>
+          tilde.town is
+          <strong>non-commercial</strong>, <a href="https://www.patreon.com/nathanielksmith">donation
+          supported</a>, and committed to rejecting false technological progress
+          in favor of <strong>empathy</strong> and <strong>sustainable</strong>
+          computing.
+        </p>
+        <h2><a href="http://goo.gl/forms/8IvQFTDjlo">sign up today!</h2>
+      </div>
+</td>
         </tr>
       </table>
-    </body>
-</html>
+    </div>
+    <div id="dynamic">
+      <div id="users" class="leftcol">
+        <h1>our esteemed users </h1>
+        <sub>({{live_user_count}} / {{user_count}} shown)</sub><br>
+        <sub>generated at {{generated_at}}</sub><br>
+        <sub>sorted by recent changes</sub><br>
+
+        <ul>
+          {{#users}}
+          {{^default}}
+          <li>
+            <a href="/~{{username}}">{{username}}</a>
+          </li>
+          {{/default}}
+          {{/users}}
+        </ul>
+        <a href="/users.html">full user list</a>
+      </div>
+      <div id="news" class="rightcol">
+        <h1>news</h1>
+        {{#news}}
+        <h4>{{title}}</h4>
+        <p><sub><em>{{pubdate}}</em></sub></p>
+        <p>
+          {{{content}}}
+        </p>
+        {{/news}}
+      </div>
+    </div>
+    <div id="footer">
+      <p>
+      Unless otherwise noted, all tilde.town materials (besides user-generated
+      content) are licensed
+      as <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC
+          4.0</a>. Users define their own licensing and own all of their content.
+      </p>
+      <p>
+      tilde.town was founded on October 11, 2014 based on inspiration
+      from <a href="http://tilde.club">tilde.club</a>.
+      </p>
+      <p>
+        tilde.town was founded and is
+      maintained by <a href="https://tilde.town/~vilmibm">~vilmibm</a>.
+      </p>
+      <p>
+        ascii postcard by <a href="https://tilde.town/~sanqui">~sanqui</a>
+      </p>
+    </div>
+  </body>
+  </html>
