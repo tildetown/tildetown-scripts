@@ -162,7 +162,7 @@ def tdp():
     now = datetime.datetime.now()
     users = sorted(
         (tdp_user(u, h) for u, h in get_users()),
-        key=lambda x:x['mtime'],
+        key=lambda x:x.get('mtime', 0),
         reverse=True)
 
     # TDP format data
