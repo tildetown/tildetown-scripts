@@ -33,107 +33,17 @@ app.config['DEBUG'] = True
 
 conf = ConfigFactory.parse_file('cfg.conf')
 
-#logfile = conf.get('logfile', '/tmp/cgi.log')
-#logging.basicConfig(filename=logfile, level=logging.DEBUG)
 logging.basicConfig(filename='/tmp/cgi.log', level=logging.DEBUG)
-
-app.config['DATA_DIR'] = conf['guestbook_dir']
-app.config['TRELLO_EMAIL'] = conf['trello_email']
-app.config['MAILGUN_URL'] = conf['mailgun_url']
-app.config['MAILGUN_KEY'] = conf['mailgun_key']
 
 @lru_cache(maxsize=32)
 def site_context():
     return get_data()
-
-def slurp(file_path):
-    contents = None
-    with open(file_path, 'r') as f:
-        contents = f.read()
-    return contents
-
-def save_post(name, message):
-    timestamp = time.time()
-    data = {
-        'name': name,
-        'message': message,
-        'timestamp': timestamp,
-    }
-    _, file_path = mkstemp(dir=app.config['DATA_DIR'])
-    with open(file_path, 'w') as f:
-        f.write(json.dumps(data))
 
 @app.route('/random', methods=['GET'])
 def get_random():
     user = random.choice(site_context()['live_users'])
     return redirect('http://tilde.town/~{}'.format(user['username']))
 
-@app.route('/guestbook', methods=['GET'])
-def get_guestbook():
-    logging.debug(app.config)
-    logging.debug('loading guestbook')
-    data_dir = app.config['DATA_DIR']
-    # TODO sort by timestamp
-    filename_to_json = lambda p: json.loads(slurp(os.path.join(data_dir, p)))
-    posts = map(filename_to_json, os.listdir(data_dir))
-    sorted_posts = sorted(posts, key=lambda p: p['timestamp'], reverse=True)
-
-    logging.debug('found {} posts'.format(len(sorted_posts)))
-
-    context = {
-        "posts": sorted_posts,
-    }
-    context.update(site_context())
-    logging.debug('rendering template...')
-    return render_template('guestbook.html', **context)
-
-@app.route('/guestbook', methods=['POST'])
-def post_guestbook():
-    message = request.form['message'][0:400]
-    name = request.form['name'][0:140]
-    captcha = request.form['hmm']
-    if captcha == "scrop":
-        save_post(name, message)
-    return redirect("/guestbook")
-
-@app.route('/helpdesk', methods=['GET'])
-def get_helpdesk():
-    status = request.args.get('status', 'unsubmitted')
-    desc = request.args.get('desc', '')
-    context = {
-        'status': status,
-        'desc': desc,
-    }
-    context.update(site_context())
-    return render_template('helpdesk.html', **context)
-
-def send_email(data):
-    name = data.get('name', 'anonymous')
-    email = data['email']
-    request_type = data['type']
-    desc = request.form['desc']
-    response = requests.post(
-        app.config['MAILGUN_URL'],
-        auth=("api", app.config['MAILGUN_KEY']),
-        data={"from": "root@tilde.town",
-              "to": app.config['TRELLO_EMAIL'],
-              "subject": "{} from {} <{}>".format(request_type, name, email),
-              "text": desc})
-
-    return response.status_code == 200
-
-@app.route('/helpdesk', methods=['POST'])
-def post_helpdesk():
-    desc = request.form['desc']
-    captcha = request.form['hmm']
-
-    if captcha == 'scrop':
-        status = "success" if send_email(request.form) else "fail"
-    else:
-        status = "fail"
-
-    # should we bother restoring other fields beside desc?
-    return redirect('/helpdesk?status={}&desc={}'.format(status, desc))
 
 if __name__ == '__main__':
     app.run()
