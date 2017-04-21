@@ -3,7 +3,17 @@ from sys import argv,stdin
 
 from pystache import render
 
-from tildetown.util import slurp
+def slurp(file_path):
+    contents = None
+    try:
+        with open(file_path, 'r', encoding="utf-8") as f:
+            contents = f.read()
+    except FileNotFoundError:
+        pass
+    except UnicodeDecodeError:
+        pass
+    return contents
+
 
 if __name__ == '__main__':
     template = slurp(argv[1])
