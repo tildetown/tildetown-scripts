@@ -4,19 +4,25 @@ from setuptools import setup
 
 setup(
     name='tildetown',
-    version='0.0.2',
-    description='python stuf for tilde.town',
+    version='1.0.0',
+    description='executable scripts used on tildetown',
     url='https://github.com/tildetown/tildetown-scripts',
-    author='vilmibm shaksfrpease',
-    author_email='nks@lambdaphil.es',
+    author='vilmibm',
+    author_email='tildetown@protonmail.ch',
     license='GPL',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 3 - Beta',
         'Intended Audience :: Other Audience',
         'Topic :: Artistic Software',
-        'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
     ],
     keywords='community',
     packages=['tildetown'],
-    install_requires = ['pyhocon==0.3.10', 'sh==1.11', 'Flask==0.10.1', 'requests==2.7.0', 'pystache==0.5.4'],
+    install_requires = ['pystache==0.5.4'],
+    entry_points = {
+          'console_scripts': [
+              'stats = tildetown.stats:main',
+              'mustache = tildetown.mustache:main'
+          ]
+    },
 )

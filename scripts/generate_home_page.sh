@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO just make this better once the new package is ready
+
 # Feed JSON/tdp output from "stats" into mustache template to generate
 # tilde.town homepage. Invoke periodically from crontab.
 

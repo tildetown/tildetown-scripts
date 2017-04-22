@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
 
 # stats.py - tilde data in tilde data protocol format.
 # Copyright 2015 Michael F. Lamb <http://datagrok.org>
