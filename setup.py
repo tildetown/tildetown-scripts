@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='tildetown',
-    version='1.0.1',
+    version='1.0.2',
     description='executable scripts used on tildetown',
     url='https://github.com/tildetown/tildetown-scripts',
     author='vilmibm',
