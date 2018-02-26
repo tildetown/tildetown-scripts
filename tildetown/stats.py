@@ -169,7 +169,7 @@ def tdp():
     data = {
         'name': 'tilde.town',
         'url': 'https://tilde.town',
-        'signup_url': 'http://goo.gl/forms/8IvQFTDjlo',
+        'signup_url': 'https://cgi.tilde.town/users/signup',
         'want_users': True,
         'admin_email': 'nathanielksmith@gmail.com',
         'description': " ".join(l.strip() for l in """
