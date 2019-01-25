@@ -59,7 +59,7 @@ import subprocess
 
 SYSTEM_USERS = ['wiki', 'root', 'ubuntu', 'nate', 'nobody']
 DEFAULT_HTML_FILENAME = "/etc/skel/public_html/index.html"
-NEWS_PATH = '/home/vilmibm/news.posts'
+NEWS_PATH = '/town/news.posts'
 blank_line_re = re.compile(r'\s*\n')
 title_re = re.compile(r'<title[^>]*>(.*)</title>', re.DOTALL)
 
